@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Pinterest Clone
+
+A pixel-perfect Pinterest clone built with Next.js 14, React, and Tailwind CSS.
+
+## Features
+
+- **Masonry Grid Layout** - Pinterest-style responsive grid with varying heights
+- **Infinite Scroll** - Automatic loading of more pins as you scroll
+- **Video on Hover** - Videos autoplay when hovering over pins
+- **Pin Overlay** - Save button and action menu on hover
+- **Profile Page** - User profile with tabs (Created/Saved)
+- **Responsive Sidebar** - Navigation sidebar with active state
+- **Search Bar** - Centered search in the navbar
+
+## Tech Stack
+
+- Next.js 14 (App Router)
+- React 18
+- TypeScript
+- Tailwind CSS
+- Lucide React (icons)
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Open http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project Structure
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```
+/app
+  /(auth)           # Auth routes group
+  /(main)           # Main app routes
+    /home           # Home feed page
+    /profile        # User profile page
+/components
+  /navbar           # Top navigation
+  /layout           # Sidebar, layout components
+  /pins             # Pin card and grid components
+  /profile          # Profile page components
+/lib
+  /data             # Mock data for pins
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Key Components
 
-## Learn More
+### PinCard
+- Displays images with optional video
+- Hover overlay with Save button
+- Three-dot menu with options
+- Dynamic height for masonry effect
 
-To learn more about Next.js, take a look at the following resources:
+### PinGrid
+- CSS columns masonry layout
+- Infinite scroll on page bottom
+- Responsive column count (2-6 columns)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Navbar
+- Pinterest logo
+- Home/Explore/Create tabs
+- Search bar (centered)
+- Notifications, messages, profile
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Sidebar
+- Fixed left navigation
+- Icons with labels
+- Active state highlighting
 
-## Deploy on Vercel
+### ProfileHeader
+- Large circular avatar
+- Username and handle
+- Follower/following counts
+- Share and Edit profile buttons
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### ProfileTabs
+- Created/Saved tabs
+- Board selector dropdown
+- Sticky header behavior
