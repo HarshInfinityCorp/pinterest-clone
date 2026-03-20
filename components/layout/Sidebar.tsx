@@ -2,12 +2,47 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, Compass, PlusCircle, User } from 'lucide-react'
+
+// Pinterest exact SVG icons
+const PinterestIcons = {
+  // Home icon - Pinterest uses filled version when active
+  Home: ({ className, fill = false }: { className?: string; fill?: boolean }) => (
+    <svg viewBox="0 0 24 24" className={className} fill={fill ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+      <polyline points="9 22 9 12 15 12 15 22"/>
+    </svg>
+  ),
+
+  // Compass/Explore icon
+  Explore: ({ className }: { className?: string }) => (
+    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+    </svg>
+  ),
+
+  // Plus/Create icon
+  Create: ({ className }: { className?: string }) => (
+    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <line x1="12" y1="8" x2="12" y2="16"/>
+      <line x1="8" y1="12" x2="16" y2="12"/>
+    </svg>
+  ),
+
+  // Profile/User icon
+  Profile: ({ className }: { className?: string }) => (
+    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+      <circle cx="12" cy="7" r="4"/>
+    </svg>
+  ),
+}
 
 const sidebarItems = [
-  { icon: Home, label: 'Home', href: '/home' },
-  { icon: Compass, label: 'Explore', href: '/explore' },
-  { icon: PlusCircle, label: 'Create', href: '/create' },
+  { icon: PinterestIcons.Home, label: 'Home', href: '/home' },
+  { icon: PinterestIcons.Explore, label: 'Explore', href: '/explore' },
+  { icon: PinterestIcons.Create, label: 'Create', href: '/create' },
 ]
 
 export function Sidebar() {
@@ -30,8 +65,11 @@ export function Sidebar() {
                   : 'text-pinterest-mediumGray hover:text-pinterest-black'
               }`}
             >
-              <div className={`p-2 rounded-full ${isActive ? 'bg-black' : 'hover:bg-pinterest-hoverGray'}`}>
-                <Icon size={24} className={isActive ? 'text-white' : 'text-current'} strokeWidth={isActive ? 2 : 1.5} />
+              <div className={`p-2 rounded-full transition-colors ${isActive ? 'bg-black' : 'hover:bg-pinterest-hoverGray'}`}>
+                <Icon 
+                  className={`w-6 h-6 ${isActive ? 'text-white' : 'text-current'}`} 
+                  fill={isActive && item.label === 'Home'}
+                />
               </div>
               <span className="text-[10px] font-medium">{item.label}</span>
             </Link>
@@ -47,8 +85,10 @@ export function Sidebar() {
             : 'text-pinterest-mediumGray hover:text-pinterest-black'
         }`}
       >
-        <div className={`p-2 rounded-full ${pathname === '/profile' ? 'bg-black' : 'hover:bg-pinterest-hoverGray'}`}>
-          <User size={24} className={pathname === '/profile' ? 'text-white' : 'text-current'} strokeWidth={pathname === '/profile' ? 2 : 1.5} />
+        <div className={`p-2 rounded-full transition-colors ${pathname === '/profile' ? 'bg-black' : 'hover:bg-pinterest-hoverGray'}`}>
+          <PinterestIcons.Profile 
+            className={`w-6 h-6 ${pathname === '/profile' ? 'text-white' : 'text-current'}`}
+          />
         </div>
         <span className="text-[10px] font-medium">Profile</span>
       </Link>
