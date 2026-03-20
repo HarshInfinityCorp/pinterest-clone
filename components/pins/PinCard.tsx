@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef } from 'react'
+import { MoreHorizontal, Upload, Link2 } from 'lucide-react'
 
 interface Pin {
   id: string
@@ -47,7 +48,7 @@ export function PinCard({ pin }: PinCardProps) {
     >
       {/* Image/Video Container - Pinterest uses 16px border-radius */}
       <div 
-        className="relative rounded-2xl overflow-hidden bg-gray-100 shadow-sm hover:shadow-md transition-shadow duration-200"
+        className="relative rounded-2xl overflow-hidden bg-pinterest-lightGray"
         style={{ aspectRatio: `236 / ${pin.height}` }}
       >
         <img
@@ -72,25 +73,21 @@ export function PinCard({ pin }: PinCardProps) {
           />
         )}
 
-        {/* Hover Overlay - Pinterest style */}
+        {/* Hover Overlay - Pinterest uses dark overlay on hover */}
         <div 
           className={`absolute inset-0 bg-black/30 transition-opacity duration-200 ${
             isHovered ? 'opacity-100' : 'opacity-0'
           }`}
         >
-          {/* Save Button - Pinterest Red */}
-          <button className="absolute top-3 right-3 bg-[#E60023] hover:bg-[#AD081B] text-white font-semibold px-4 py-2.5 rounded-full text-sm transition-colors shadow-lg">
+          {/* Save Button - Pinterest Red, top-right */}
+          <button className="absolute top-3 right-3 bg-pinterest-red hover:bg-pinterest-darkRed text-white font-semibold px-4 py-2.5 rounded-full text-sm transition-colors">
             Save
           </button>
 
           {/* Bottom Actions */}
           <div className="absolute bottom-3 right-3 flex items-center gap-2">
-            <button className="w-8 h-8 bg-white/90 hover:bg-white rounded-full flex items-center justify-center transition-colors shadow-sm">
-              <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                <polyline points="7 10 12 15 17 10"/>
-                <line x1="12" y1="15" x2="12" y2="3"/>
-              </svg>
+            <button className="w-8 h-8 bg-white/90 hover:bg-white rounded-full flex items-center justify-center transition-colors">
+              <Upload size={16} className="text-pinterest-black" strokeWidth={2} />
             </button>
             
             <div className="relative">
@@ -99,29 +96,22 @@ export function PinCard({ pin }: PinCardProps) {
                   e.stopPropagation()
                   setShowMenu(!showMenu)
                 }}
-                className="w-8 h-8 bg-white/90 hover:bg-white rounded-full flex items-center justify-center transition-colors shadow-sm"
+                className="w-8 h-8 bg-white/90 hover:bg-white rounded-full flex items-center justify-center transition-colors"
               >
-                <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2">
-                  <circle cx="12" cy="12" r="1"/>
-                  <circle cx="19" cy="12" r="1"/>
-                  <circle cx="5" cy="12" r="1"/>
-                </svg>
+                <MoreHorizontal size={16} className="text-pinterest-black" strokeWidth={2} />
               </button>
 
               {/* Dropdown Menu */}
               {showMenu && (
                 <div className="absolute right-0 bottom-full mb-2 bg-white rounded-2xl shadow-2xl py-2 min-w-[200px] z-20 border border-gray-100">
-                  <button className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 flex items-center gap-3 text-black">
-                    <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
-                      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
-                    </svg>
+                  <button className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 flex items-center gap-3 text-pinterest-black">
+                    <Link2 size={16} />
                     Copy link
                   </button>
-                  <button className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-black">
+                  <button className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-pinterest-black">
                     Hide Pin
                   </button>
-                  <button className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-black">
+                  <button className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-pinterest-black">
                     Report Pin
                   </button>
                 </div>
@@ -133,9 +123,9 @@ export function PinCard({ pin }: PinCardProps) {
 
       {/* Pin Info - Pinterest Style */}
       <div className="mt-2 px-1">
-        <p className="text-sm font-semibold text-black truncate leading-tight">{pin.title}</p>
+        <p className="text-sm font-semibold text-pinterest-black truncate leading-tight">{pin.title}</p>
         <div className="flex items-center gap-2 mt-1.5">
-          <div className="w-5 h-5 rounded-full bg-gray-200 overflow-hidden flex-shrink-0">
+          <div className="w-5 h-5 rounded-full bg-pinterest-lightGray overflow-hidden flex-shrink-0">
             <img 
               src={pin.author.avatar} 
               alt={pin.author.name}
@@ -143,7 +133,7 @@ export function PinCard({ pin }: PinCardProps) {
               loading="lazy"
             />
           </div>
-          <span className="text-xs text-gray-600 truncate">{pin.author.name}</span>
+          <span className="text-xs text-pinterest-darkGray truncate">{pin.author.name}</span>
         </div>
       </div>
     </div>

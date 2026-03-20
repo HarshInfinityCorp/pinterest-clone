@@ -1,4 +1,5 @@
 import { Navbar } from '@/components/navbar/Navbar'
+import { Sidebar } from '@/components/layout/Sidebar'
 
 export default function MainLayout({
   children,
@@ -8,9 +9,12 @@ export default function MainLayout({
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
-      <main className="pt-[80px] px-4">
-        {children}
-      </main>
+      <div className="flex">
+        <Sidebar />
+        <main className="flex-1 lg:ml-16 pt-20 px-4">
+          {children}
+        </main>
+      </div>
     </div>
   )
 }
