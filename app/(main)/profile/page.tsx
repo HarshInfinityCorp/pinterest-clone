@@ -8,7 +8,7 @@ export default function ProfilePage() {
     <div className="max-w-[1200px] mx-auto pb-8">
       <ProfileHeader />
       <ProfileTabs />
-      <PinGrid pins={pins.slice(0, 12)} />
+      <PinGrid pins={pins.slice(0, 10)} />
     </div>
   )
 }
