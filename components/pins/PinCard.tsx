@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef } from 'react'
+import Link from 'next/link'
 import { MoreHorizontal, Upload, Link2 } from 'lucide-react'
 
 interface Pin {
@@ -41,8 +42,9 @@ export function PinCard({ pin }: PinCardProps) {
   }
 
   return (
-    <div 
-      className="masonry-item relative group cursor-zoom-in"
+    <Link 
+      href={`/pin/${pin.id}`}
+      className="masonry-item relative group cursor-zoom-in block"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -80,19 +82,26 @@ export function PinCard({ pin }: PinCardProps) {
           }`}
         >
           {/* Save Button - Pinterest Red, top-right */}
-          <button className="absolute top-3 right-3 bg-pinterest-red hover:bg-pinterest-darkRed text-white font-semibold px-4 py-2.5 rounded-full text-sm transition-colors">
+          <button 
+            className="absolute top-3 right-3 bg-pinterest-red hover:bg-pinterest-darkRed text-white font-semibold px-4 py-2.5 rounded-full text-sm transition-colors"
+            onClick={(e) => e.preventDefault()}
+          >
             Save
           </button>
 
           {/* Bottom Actions */}
           <div className="absolute bottom-3 right-3 flex items-center gap-2">
-            <button className="w-8 h-8 bg-white/90 hover:bg-white rounded-full flex items-center justify-center transition-colors">
+            <button 
+              className="w-8 h-8 bg-white/90 hover:bg-white rounded-full flex items-center justify-center transition-colors"
+              onClick={(e) => e.preventDefault()}
+            >
               <Upload size={16} className="text-pinterest-black" strokeWidth={2} />
             </button>
             
             <div className="relative">
               <button 
                 onClick={(e) => {
+                  e.preventDefault()
                   e.stopPropagation()
                   setShowMenu(!showMenu)
                 }}
@@ -103,15 +112,25 @@ export function PinCard({ pin }: PinCardProps) {
 
               {/* Dropdown Menu */}
               {showMenu && (
-                <div className="absolute right-0 bottom-full mb-2 bg-white rounded-2xl shadow-2xl py-2 min-w-[200px] z-20 border border-gray-100">
-                  <button className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 flex items-center gap-3 text-pinterest-black">
+                <div className="absolute right-0 bottom-full mb-2 bg-white rounded-2xl shadow-2xl py-2 min-w-[200px] z-20 border border-gray-100"
+                >
+                  <button 
+                    className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 flex items-center gap-3 text-pinterest-black"
+                    onClick={(e) => e.preventDefault()}
+                  >
                     <Link2 size={16} />
                     Copy link
                   </button>
-                  <button className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-pinterest-black">
+                  <button 
+                    className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-pinterest-black"
+                    onClick={(e) => e.preventDefault()}
+                  >
                     Hide Pin
                   </button>
-                  <button className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-pinterest-black">
+                  <button 
+                    className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-pinterest-black"
+                    onClick={(e) => e.preventDefault()}
+                  >
                     Report Pin
                   </button>
                 </div>
@@ -136,6 +155,6 @@ export function PinCard({ pin }: PinCardProps) {
           <span className="text-xs text-pinterest-darkGray truncate">{pin.author.name}</span>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
