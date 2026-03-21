@@ -98,21 +98,23 @@ const sampleVideos = [
   'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
 ]
 
-function generateRandomHeight(): number {
+function generateHeight(index: number): number {
   // Pinterest uses a range of aspect ratios for masonry effect
+  // Use index-based selection instead of Math.random() to keep SSR & client in sync
   const heights = [280, 320, 380, 420, 480, 520, 580, 620, 380, 420]
-  return heights[Math.floor(Math.random() * heights.length)]
+  return heights[index % heights.length]
 }
 
 export const pins: Pin[] = Array.from({ length: 100 }, (_, i) => {
-  const hasVideo = Math.random() < 0.15 // 15% of pins have videos
-  
+  // Use a deterministic pattern instead of Math.random() to avoid SSR/client mismatch
+  const hasVideo = i % 7 === 0 // every 7th pin has a video (~14%)
+
   return {
     id: `pin-${i}`,
     image: sampleImages[i % sampleImages.length],
     ...(hasVideo && { video: sampleVideos[i % sampleVideos.length] }),
     title: sampleTitles[i % sampleTitles.length],
     author: sampleAuthors[i % sampleAuthors.length],
-    height: generateRandomHeight(),
+    height: generateHeight(i),
   }
 })
