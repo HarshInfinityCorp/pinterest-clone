@@ -105,31 +105,7 @@ export function Navbar() {
   }, [])
 
   return (
-    <header className="fixed top-0 left-0 right-0 h-20 bg-white z-50 px-4 flex items-center gap-2">
-      {/* Logo */}
-      <Link href="/home" className="flex items-center justify-center w-12 h-12 rounded-full hover:bg-pinterest-hoverGray transition-colors flex-shrink-0">
-        <PinterestIcons.Logo />
-      </Link>
-
-      {/* Navigation Tabs - Exact Pinterest Style */}
-      <nav className="hidden md:flex items-center gap-0">
-        {navItems.map((item) => {
-          const isActive = pathname === item.href
-          return (
-            <Link 
-              key={item.href}
-              href={item.href} 
-              className={`px-4 py-3 rounded-full font-semibold text-sm transition-all duration-75 ${
-                isActive 
-                  ? 'bg-pinterest-black text-white' 
-                  : 'text-pinterest-black hover:bg-pinterest-hoverGray'
-              }`}
-            >
-              {item.label}
-            </Link>
-          )
-        })}
-      </nav>
+    <header className="sticky top-0 h-20 bg-white z-30 px-4 flex items-center gap-2">
 
       {/* Search Bar with Dropdown */}
       <div className="flex-1 min-w-0 relative" ref={searchRef}>
@@ -235,32 +211,6 @@ export function Navbar() {
         )}
       </div>
 
-      {/* Right Section - Exact Pinterest Icons */}
-      <div className="flex items-center gap-1 flex-shrink-0">
-        <button className="flex items-center justify-center w-12 h-12 rounded-full hover:bg-pinterest-hoverGray transition-colors text-pinterest-mediumGray">
-          <PinterestIcons.Notification />
-        </button>
-        
-        <button className="flex items-center justify-center w-12 h-12 rounded-full hover:bg-pinterest-hoverGray transition-colors text-pinterest-mediumGray">
-          <PinterestIcons.Message />
-        </button>
-
-        <button 
-          onClick={() => setIsProfileOpen(!isProfileOpen)}
-          className="flex items-center gap-1 p-2 rounded-full hover:bg-pinterest-hoverGray transition-colors"
-        >
-          <div className="w-6 h-6 rounded-full bg-pinterest-lightGray overflow-hidden">
-            <img 
-              src="https://i.pravatar.cc/150?u=pinterestuser" 
-              alt="Profile" 
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="text-pinterest-mediumGray">
-            <PinterestIcons.ChevronDown />
-          </div>
-        </button>
-      </div>
     </header>
   )
 }

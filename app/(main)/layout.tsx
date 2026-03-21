@@ -8,13 +8,14 @@ export default function MainLayout({
 }) {
   return (
     <div className="min-h-screen bg-white">
-      <Navbar />
-      <div className="flex">
-        <Sidebar />
-        <main className="flex-1 lg:ml-16 pt-20 px-4">
+      <Sidebar />
+      <div className="lg:ml-[72px]">
+        <Navbar />
+        <main className="pt-20 px-4">
           {children}
         </main>
       </div>
     </div>
   )
 }
+
