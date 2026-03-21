@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef } from 'react'
-import { MoreHorizontal, Upload, Link2 } from 'lucide-react'
+import { MoreHorizontal, Upload, Link2, EyeOff, Heart, Minus, Download, Ban, ChevronDown } from 'lucide-react'
 
 interface Pin {
   id: string
@@ -22,6 +22,7 @@ interface PinCardProps {
 export function PinCard({ pin }: PinCardProps) {
   const [isHovered, setIsHovered] = useState(false)
   const [showMenu, setShowMenu] = useState(false)
+  const [isSaved, setIsSaved] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
 
   const handleMouseEnter = () => {
@@ -40,6 +41,18 @@ export function PinCard({ pin }: PinCardProps) {
     }
   }
 
+  const handleSave = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setIsSaved(true)
+  }
+
+  const handleUnsave = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setIsSaved(false)
+  }
+
   return (
     <div 
       className="masonry-item relative group cursor-zoom-in"
@@ -48,7 +61,7 @@ export function PinCard({ pin }: PinCardProps) {
     >
       {/* Image/Video Container - Pinterest uses 16px border-radius */}
       <div 
-        className="relative rounded-2xl overflow-hidden bg-pinterest-lightGray"
+        className="relative rounded-2xl overflow-hidden bg-[#e9e9e9]"
       >
         <img
           src={pin.image}
@@ -72,45 +85,96 @@ export function PinCard({ pin }: PinCardProps) {
           />
         )}
 
-        {/* Hover Overlay - Pinterest uses dark overlay on hover */}
+        {/* Hover Overlay */}
         <div 
-          className={`absolute inset-0 bg-black/30 transition-opacity duration-200 ${
-            isHovered ? 'opacity-100' : 'opacity-0'
+          className={`absolute inset-0 transition-opacity duration-200 ${
+            isHovered || showMenu ? 'opacity-100' : 'opacity-0'
           }`}
         >
-          {/* Save Button - Pinterest Red, top-right */}
-          <button className="absolute top-3 right-3 bg-pinterest-red hover:bg-pinterest-darkRed text-white font-semibold px-4 py-2.5 rounded-full text-sm transition-colors">
-            Save
-          </button>
+          {/* Subtle gradient so white buttons are visible */}
+          <div className="absolute inset-0 bg-black/20" />
+
+          {/* Top Actions Area */}
+          <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
+             {isSaved ? (
+                <>
+                  <div className="flex items-center gap-2 pointer-events-auto w-full justify-between">
+                     <button className="flex items-center px-4 py-3 rounded-xl font-bold text-[15px] text-white transition-opacity bg-transparent ring-2 ring-[#0060df] hover:bg-white/10 ml-1">
+                        Saved to Profile
+                     </button>
+                     <button
+                        onClick={handleUnsave}
+                        className="bg-[#222] hover:bg-[#111] text-white font-bold px-5 py-3.5 rounded-full text-[15px] transition-colors"
+                     >
+                        Saved
+                     </button>
+                  </div>
+                </>
+             ) : (
+                <>
+                  <div className="pointer-events-auto">
+                     <button className="flex items-center justify-center font-bold px-4 py-3 text-white transition-colors bg-transparent border-none opacity-0">
+                        Profile <ChevronDown size={18} className="ml-1"/>
+                     </button>
+                  </div>
+                  <div className="pointer-events-auto">
+                     <button 
+                        onClick={handleSave}
+                        className="bg-[#e60023] hover:bg-[#ad081b] text-white font-bold px-5 py-3.5 rounded-full text-[15px] transition-colors"
+                     >
+                        Save
+                     </button>
+                  </div>
+                </>
+             )}
+          </div>
 
           {/* Bottom Actions */}
-          <div className="absolute bottom-3 right-3 flex items-center gap-2">
-            <button className="w-8 h-8 bg-white/90 hover:bg-white rounded-full flex items-center justify-center transition-colors">
-              <Upload size={16} className="text-pinterest-black" strokeWidth={2} />
+          <div className="absolute bottom-3 right-3 flex items-center gap-2 pointer-events-auto">
+            <button className="w-8 h-8 bg-white/90 hover:bg-white border-transparent rounded-full flex items-center justify-center transition-colors shadow-sm">
+              <Upload size={18} className="text-black shrink-0" strokeWidth={2.5} />
             </button>
             
             <div className="relative">
               <button 
                 onClick={(e) => {
+                  e.preventDefault()
                   e.stopPropagation()
                   setShowMenu(!showMenu)
                 }}
-                className="w-8 h-8 bg-white/90 hover:bg-white rounded-full flex items-center justify-center transition-colors"
+                className={`w-8 h-8 bg-white/90 hover:bg-white border-transparent rounded-full flex items-center justify-center transition-colors shadow-sm ${showMenu ? 'bg-white' : ''}`}
               >
-                <MoreHorizontal size={16} className="text-pinterest-black" strokeWidth={2} />
+                <MoreHorizontal size={18} className="text-black shrink-0" strokeWidth={2.5} />
               </button>
 
-              {/* Dropdown Menu */}
+              {/* Dropdown Context Menu precisely modeled after screenshot */}
               {showMenu && (
-                <div className="absolute right-0 bottom-full mb-2 bg-white rounded-2xl shadow-2xl py-2 min-w-[200px] z-20 border border-gray-100">
-                  <button className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 flex items-center gap-3 text-pinterest-black">
-                    <Link2 size={16} />
-                    Copy link
+                <div className="absolute right-0 bottom-full mb-3 bg-white rounded-2xl shadow-[0_2px_12px_rgba(0,0,0,0.2)] py-4 min-w-[280px] w-[320px] max-w-[340px] z-50 border border-gray-100 flex flex-col pointer-events-auto cursor-default">
+                  
+                  <div className="px-5 mb-3">
+                     <p className="text-[15px] leading-tight text-[#111]">
+                        This Pin was inspired by your recent activity. We believe it may have been modified with AI.
+                     </p>
+                  </div>
+                  
+                  <button className="w-full px-5 py-3 text-left text-[16px] font-bold hover:bg-gray-100 flex items-center gap-4 text-[#111] transition-colors">
+                    <EyeOff size={22} className="shrink-0" strokeWidth={2} />
+                    See less like this
                   </button>
-                  <button className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-pinterest-black">
-                    Hide Pin
+                  <button className="w-full px-5 py-3 text-left text-[16px] font-bold hover:bg-gray-100 flex items-center gap-4 text-[#111] transition-colors">
+                    <Heart size={22} className="shrink-0" strokeWidth={2} />
+                    See more like this
                   </button>
-                  <button className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-pinterest-black">
+                  <button className="w-full px-5 py-3 text-left text-[16px] font-bold hover:bg-gray-100 flex items-center gap-4 text-[#111] transition-colors">
+                    <Minus size={22} className="shrink-0" strokeWidth={2} />
+                    See fewer AI art Pins
+                  </button>
+                  <button className="w-full px-5 py-3 text-left text-[16px] font-bold hover:bg-gray-100 flex items-center gap-4 text-[#111] transition-colors">
+                    <Download size={22} className="shrink-0" strokeWidth={2} />
+                    Download image
+                  </button>
+                  <button className="w-full px-5 py-3 text-left text-[16px] font-bold hover:bg-gray-100 flex items-center gap-4 text-[#111] transition-colors">
+                    <Ban size={22} className="shrink-0" strokeWidth={2} />
                     Report Pin
                   </button>
                 </div>
@@ -120,21 +184,6 @@ export function PinCard({ pin }: PinCardProps) {
         </div>
       </div>
 
-      {/* Pin Info - Pinterest Style */}
-      <div className="mt-2 px-1">
-        <p className="text-sm font-semibold text-pinterest-black truncate leading-tight">{pin.title}</p>
-        <div className="flex items-center gap-2 mt-1.5">
-          <div className="w-5 h-5 rounded-full bg-pinterest-lightGray overflow-hidden flex-shrink-0">
-            <img 
-              src={pin.author.avatar} 
-              alt={pin.author.name}
-              className="w-full h-full object-cover"
-              loading="lazy"
-            />
-          </div>
-          <span className="text-xs text-pinterest-darkGray truncate">{pin.author.name}</span>
-        </div>
-      </div>
     </div>
   )
 }

@@ -111,7 +111,7 @@ export const pins: Pin[] = Array.from({ length: 100 }, (_, i) => {
 
   return {
     id: `pin-${i}`,
-    image: sampleImages[i % sampleImages.length],
+    image: `https://picsum.photos/seed/pinterest${i}/400/${generateHeight(i)}`,
     ...(hasVideo && { video: sampleVideos[i % sampleVideos.length] }),
     title: sampleTitles[i % sampleTitles.length],
     author: sampleAuthors[i % sampleAuthors.length],
