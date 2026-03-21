@@ -93,6 +93,42 @@ export function Sidebar() {
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false)
   const [loadingNotifications, setLoadingNotifications] = useState(true)
   const [activeNotificationMenu, setActiveNotificationMenu] = useState<number | null>(null)
+  const [isMessagesOpen, setIsMessagesOpen] = useState(false)
+  const [loadingMessages, setLoadingMessages] = useState(true)
+  
+  // Larger pool of potential notifications
+  const notificationPool = [
+    { title: "Your style is iconic", time: "1h", image: '1556912172-45b7abe8b7e1' },
+    { title: "Spotted: new design trends", time: "3h", image: '1470075801047-af8601f74936' },
+    { title: "You're picking up new skills!", time: "5h", image: '1506744038136-46273834b3fb' },
+    { title: "Weekly design insights for you", time: "12h", image: '1483985988355-763728e1935b' },
+    { title: "Your latest board is trending", time: "1d", image: '1504674900247-0877df9cc836' },
+    { title: "New AI tools discovered", time: "2d", image: '1474511320309-1455a73b2c42' },
+  ]
+
+  const [notificationsList, setNotificationsList] = useState([
+    { title: "You’re so good at curating...", time: "20h", image: '1535713875002-d1d0cf377fde' },
+    { title: "Your taste is excellent", time: "2d", image: '1506794778202-cad84cf45f1d' },
+    { title: "So you", time: "3d", image: '1534528741775-53994a69daeb' },
+    { title: "Your taste is excellent", time: "4d", image: '1507003211169-0a1dd7228f2d' },
+    { title: "You’re so good at curating...", time: "5d", image: '1539327232231-150700321116' },
+    { title: "Your taste is excellent", time: "6d", image: '1474511320309-1455a73b2c42' },
+  ])
+
+  const [poolIndex, setPoolIndex] = useState(0)
+
+  const handleDeleteNotification = (index: number) => {
+    setNotificationsList(prev => {
+      const filtered = prev.filter((_, i) => i !== index)
+      if (poolIndex < notificationPool.length) {
+        const withNewOne = [...filtered, notificationPool[poolIndex]]
+        setPoolIndex(prevPool => prevPool + 1)
+        return withNewOne
+      }
+      return filtered
+    })
+    setActiveNotificationMenu(null)
+  }
 
   useEffect(() => {
     if (isNotificationsOpen) {
@@ -105,6 +141,17 @@ export function Sidebar() {
       setActiveNotificationMenu(null)
     }
   }, [isNotificationsOpen])
+
+  useEffect(() => {
+    if (isMessagesOpen) {
+      setLoadingMessages(true)
+      const timer = setTimeout(() => {
+        setLoadingMessages(false)
+      }, 1000)
+      return () => clearTimeout(timer)
+    }
+  }, [isMessagesOpen])
+
   const [isBoardModalOpen, setIsBoardModalOpen] = useState(false)
   const [boardName, setBoardName] = useState('')
   const [isSecret, setIsSecret] = useState(false)
@@ -112,6 +159,7 @@ export function Sidebar() {
   const settingsRef = useRef<HTMLDivElement>(null)
   const createRef = useRef<HTMLDivElement>(null)
   const notificationsRef = useRef<HTMLDivElement>(null)
+  const messagesRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -123,6 +171,9 @@ export function Sidebar() {
       }
       if (notificationsRef.current && !notificationsRef.current.contains(event.target as Node)) {
         setIsNotificationsOpen(false)
+      }
+      if (messagesRef.current && !messagesRef.current.contains(event.target as Node)) {
+        setIsMessagesOpen(false)
       }
     }
     document.addEventListener('mousedown', handleClickOutside)
@@ -217,34 +268,32 @@ export function Sidebar() {
               }
 
               if (item.isNotifications) {
-                 return (
-                    <div key={item.href} className="relative" ref={notificationsRef}>
-                      <button
-                        onClick={() => {
-                           setIsNotificationsOpen(!isNotificationsOpen);
-                           setIsCreateOpen(false);
-                           setIsSettingsOpen(false);
-                        }}
-                        className="flex flex-col items-center justify-center transition-colors outline-none cursor-pointer"
-                        aria-label={item.label}
-                      >
-                        <div className={`w-12 h-12 flex items-center justify-center rounded-full transition-colors ${isActive ? 'bg-black text-white' : 'text-[#767676] hover:bg-gray-100 hover:text-black'}`}>
-                          <Icon className="w-6 h-6" />
-                        </div>
-                      </button>
+                return (
+                  <div key={item.href} className="relative" ref={notificationsRef}>
+                    <button
+                      onClick={() => {
+                        setIsNotificationsOpen(!isNotificationsOpen);
+                        setIsCreateOpen(false);
+                        setIsSettingsOpen(false);
+                      }}
+                      className="flex flex-col items-center justify-center transition-colors outline-none cursor-pointer"
+                      aria-label={item.label}
+                    >
+                      <div className={`w-12 h-12 flex items-center justify-center rounded-full transition-colors ${isActive ? 'bg-black text-white' : 'text-[#767676] hover:bg-gray-100 hover:text-black'}`}>
+                        <Icon className="w-6 h-6" />
+                      </div>
+                    </button>
 
-                      {/* Notifications (Updates) Popover */}
-                      {isNotificationsOpen && (
-                        <div className="fixed left-[72px] top-0 bottom-0 z-[100] pl-2 cursor-default animate-in slide-in-from-left duration-300">
-                           <div className="bg-white shadow-[2px_0_16px_rgba(0,0,0,0.1)] w-[400px] h-full flex flex-col border-r border-gray-100 pb-4 overflow-hidden">
-                              <div className="px-6 pt-8 pb-4">
-                                 <h2 className="text-[20px] font-bold text-black text-center">Updates</h2>
-                              </div>
-                              
-                              <div className="flex-1 overflow-hidden flex flex-col">
+                    {/* Notifications (Updates) Popover */}
+                    {isNotificationsOpen && (
+                      <div className="fixed left-[84px] top-3 bottom-3 z-[100] cursor-default animate-in slide-in-from-left duration-300">
+                        <div className="bg-white shadow-[0_10px_60px_rgba(0,0,0,0.15)] w-[380px] h-full flex flex-col rounded-[32px] border border-gray-100 pb-4 overflow-hidden">
+                          <div className="px-8 pt-10 pb-4">
+                            <h2 className="text-[20px] font-bold text-black text-center">Updates</h2>
+                          </div>
+                           <div className="flex-1 overflow-hidden flex flex-col">
                                  {loadingNotifications ? (
                                     <div className="flex-1 flex flex-col items-center justify-center">
-                                       {/* Pinterest-style 3-dot Loading Animation */}
                                        <div className="flex items-center gap-2">
                                           <div className="w-2.5 h-2.5 bg-[#767676] rounded-full animate-[pulse_1.5s_ease-in-out_infinite]"></div>
                                           <div className="w-2.5 h-2.5 bg-[#767676] rounded-full animate-[pulse_1.5s_ease-in-out_0.2s_infinite]"></div>
@@ -256,71 +305,66 @@ export function Sidebar() {
                                        <div className="px-4 py-2">
                                           <h3 className="text-[16px] font-bold text-black">Seen</h3>
                                        </div>
-                                       {[
-                                         { title: "You’re so good at curating...", time: "20h" },
-                                         { title: "Your taste is excellent", time: "2d" },
-                                         { title: "So you", time: "3d" },
-                                         { title: "Your taste is excellent", time: "4d" },
-                                         { title: "You’re so good at curating...", time: "5d" },
-                                         { title: "Your taste is excellent", time: "6d" },
-                                         { title: "Big mood", time: "1w" },
-                                         { title: "Your taste is excellent", time: "1w" },
-                                         { title: "My photo gallery for you", time: "1w" },
-                                       ].map((item, i) => (
-                                          <div key={i} className={`relative flex items-center gap-3 px-4 py-3 transition-colors cursor-pointer group rounded-2xl ${activeNotificationMenu === i ? 'bg-[#E9E9E9]' : 'hover:bg-gray-50'}`}>
-                                             <div className="w-16 h-16 rounded-[12px] overflow-hidden shrink-0 bg-[#E9E9E9]">
-                                                <img 
-                                                   src={`https://images.unsplash.com/photo-${[
-                                                      '1675271591211-126ad94e1d7d', '1620712943543-bcc4628c6a20', '1678911820864-e2c567c655d7',
-                                                      '1485081666276-0c5c7ad503d7', '1581091226825-a6a2a5aee158', '1605810230434-7631ac76ec81',
-                                                      '1550751827-4bd374c3f58b', '1518770660439-4636190af475', '1451187580459-43490279c0fa'
-                                                   ][i % 9]}?w=150&h=150&fit=crop`} 
-                                                   alt="" 
-                                                   className="w-full h-full object-cover" 
-                                                />
-                                             </div>
-                                             <div className="flex-1 min-w-0 pr-2">
-                                                <span className="text-[15px] leading-tight text-black font-semibold line-clamp-2">
-                                                   {item.title}
-                                                </span>
-                                             </div>
-                                             <div className="flex flex-col items-end gap-1 shrink-0 relative">
-                                                <span className="text-[12px] text-[#767676]">{item.time}</span>
-                                                <button 
-                                                   onClick={(e) => {
-                                                      e.stopPropagation();
-                                                      setActiveNotificationMenu(activeNotificationMenu === i ? null : i);
-                                                   }}
-                                                   className={`flex items-center justify-center w-8 h-8 rounded-full transition-colors ${activeNotificationMenu === i ? 'bg-white shadow-sm' : 'text-[#111] hover:bg-gray-200'}`}
-                                                >
-                                                   <span className="text-xl font-bold mb-3">...</span>
-                                                </button>
+                                       {notificationsList.length > 0 ? (
+                                          notificationsList.map((item, i) => (
+                                             <div key={i} className={`relative flex items-center gap-3 px-4 py-3 transition-colors cursor-pointer group rounded-2xl ${activeNotificationMenu === i ? 'bg-[#E9E9E9]' : 'hover:bg-gray-50'}`}>
+                                                <div className="w-16 h-16 rounded-[12px] overflow-hidden shrink-0 bg-[#E9E9E9]">
+                                                   <img 
+                                                      src={`https://images.unsplash.com/photo-${item.image}?w=150&h=150&fit=crop`} 
+                                                      alt="" 
+                                                      className="w-full h-full object-cover" 
+                                                   />
+                                                </div>
+                                                <div className="flex-1 min-w-0 pr-2">
+                                                   <span className="text-[15px] leading-tight text-black font-semibold line-clamp-2">
+                                                      {item.title}
+                                                   </span>
+                                                </div>
+                                                <div className="flex flex-col items-end gap-1 shrink-0 relative">
+                                                   <span className="text-[12px] text-[#767676]">{item.time}</span>
+                                                   <button 
+                                                      onClick={(e) => {
+                                                         e.stopPropagation();
+                                                         setActiveNotificationMenu(activeNotificationMenu === i ? null : i);
+                                                      }}
+                                                      className={`flex items-center justify-center w-8 h-8 rounded-full transition-colors ${activeNotificationMenu === i ? 'bg-white shadow-sm' : 'text-[#111] hover:bg-gray-200'}`}
+                                                   >
+                                                      <span className="text-xl font-bold mb-3">...</span>
+                                                   </button>
 
-                                                {/* Action Popup */}
-                                                {activeNotificationMenu === i && (
-                                                   <div className="absolute top-10 right-0 z-[110] bg-white rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.15)] py-2 w-[220px] animate-in fade-in zoom-in-95 duration-100 origin-top-right">
-                                                      <button className="w-full text-left px-4 py-2 hover:bg-gray-100 text-[15px] font-bold text-black group/item">
-                                                         Delete update
-                                                      </button>
-                                                      <button className="w-full text-left px-4 py-2 hover:bg-gray-100 text-[15px] font-bold text-black group/item">
-                                                         View notification settings
-                                                      </button>
-                                                   </div>
-                                                )}
+                                                   {/* Action Popup */}
+                                                   {activeNotificationMenu === i && (
+                                                      <div className="absolute top-10 right-0 z-[110] bg-white rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.15)] py-2 w-[220px] animate-in fade-in zoom-in-95 duration-100 origin-top-right">
+                                                         <button 
+                                                            onClick={(e) => {
+                                                               e.stopPropagation();
+                                                               handleDeleteNotification(i);
+                                                            }}
+                                                            className="w-full text-left px-4 py-2 hover:bg-gray-100 text-[15px] font-bold text-black group/item"
+                                                         >
+                                                            Delete update
+                                                         </button>
+                                                         <button className="w-full text-left px-4 py-2 hover:bg-gray-100 text-[15px] font-bold text-black group/item">
+                                                            View notification settings
+                                                         </button>
+                                                      </div>
+                                                   )}
+                                                </div>
                                              </div>
+                                          ))
+                                       ) : (
+                                          <div className="flex-1 flex items-center justify-center pt-20 text-[#767676] font-medium">
+                                             No more updates!
                                           </div>
-                                       ))}
+                                       )}
                                     </div>
                                  )}
                               </div>
-                              
-                              {/* Hidden real content for now, or we can just show the loader if that's what's requested specifically */}
-                              {/* (Removed the mock content to focus on the requested loader UI) */}
-                           </div>
                         </div>
-                      )}
-                    </div>
-                 )
+                      </div>
+                    )}
+                  </div>
+                )
               }
 
               return (

@@ -178,12 +178,12 @@ export function Navbar() {
                       setSearchQuery(search)
                       setIsSearchOpen(false)
                     }}
-                    className="flex items-center gap-3 p-1.5 pr-5 rounded-[16px] bg-[#F0F0F0] hover:bg-[#E2E2E2] transition-colors text-left"
+                    className="flex items-center gap-3 p-1.5 pr-4 rounded-[20px] bg-[#F0F0F0] hover:bg-[#E2E2E2] transition-colors text-left w-[300px]"
                   >
-                    <div className="w-15 h-15 rounded-[12px] bg-[#E2E2E2] flex items-center justify-center flex-shrink-0">
-                      <Search size={22} className="text-black" strokeWidth={3} />
+                    <div className="w-[60px] h-[60px] rounded-[16px] bg-[#DCDCDC] flex items-center justify-center flex-shrink-0">
+                      <Search size={24} className="text-black" strokeWidth={2.5} />
                     </div>
-                    <span className="text-[15px] font-bold text-black whitespace-nowrap">{search}</span>
+                    <span className="text-[14px] font-bold text-black leading-tight line-clamp-2 pr-1">{search}</span>
                   </button>
                 ))}
               </div>

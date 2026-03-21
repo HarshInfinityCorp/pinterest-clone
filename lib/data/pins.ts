@@ -117,7 +117,7 @@ const unsplashIds = [
 
 export const pins: Pin[] = Array.from({ length: 100 }, (_, i) => {
   // Use a deterministic pattern
-  const hasVideo = i % 7 === 0 
+  const hasVideo = i % 7 === 0
   const photoId = unsplashIds[i % unsplashIds.length]
   const height = generateHeight(i)
 
