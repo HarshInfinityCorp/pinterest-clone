@@ -95,7 +95,7 @@ export function Sidebar() {
   const [activeNotificationMenu, setActiveNotificationMenu] = useState<number | null>(null)
   const [isMessagesOpen, setIsMessagesOpen] = useState(false)
   const [loadingMessages, setLoadingMessages] = useState(true)
-  
+
   // Larger pool of potential notifications
   const notificationPool = [
     { title: "Your style is iconic", time: "1h", image: '1556912172-45b7abe8b7e1' },
@@ -209,7 +209,7 @@ export function Sidebar() {
                       className="flex flex-col items-center justify-center transition-colors outline-none cursor-pointer"
                       aria-label={item.label}
                     >
-                      <div className={`w-12 h-12 flex items-center justify-center rounded-full transition-colors ${isActive ? 'bg-black text-white' : 'text-[#767676] hover:bg-gray-100 hover:text-black'}`}>
+                      <div className={`w-12 h-12 flex items-center justify-center rounded-full transition-colors ${isActive ? 'bg-black text-white' : 'text-black hover:bg-gray-100 hover:text-black'}`}>
                         <Icon className="w-6 h-6" />
                       </div>
                     </button>
@@ -279,7 +279,7 @@ export function Sidebar() {
                       className="flex flex-col items-center justify-center transition-colors outline-none cursor-pointer"
                       aria-label={item.label}
                     >
-                      <div className={`w-12 h-12 flex items-center justify-center rounded-full transition-colors ${isActive ? 'bg-black text-white' : 'text-[#767676] hover:bg-gray-100 hover:text-black'}`}>
+                      <div className={`w-12 h-12 flex items-center justify-center rounded-full transition-colors ${isActive ? 'bg-black text-white' : 'text-black hover:bg-gray-100 hover:text-black'}`}>
                         <Icon className="w-6 h-6" />
                       </div>
                     </button>
@@ -291,75 +291,75 @@ export function Sidebar() {
                           <div className="px-8 pt-10 pb-4">
                             <h2 className="text-[20px] font-bold text-black text-center">Updates</h2>
                           </div>
-                           <div className="flex-1 overflow-hidden flex flex-col">
-                                 {loadingNotifications ? (
-                                    <div className="flex-1 flex flex-col items-center justify-center">
-                                       <div className="flex items-center gap-2">
-                                          <div className="w-2.5 h-2.5 bg-[#767676] rounded-full animate-[pulse_1.5s_ease-in-out_infinite]"></div>
-                                          <div className="w-2.5 h-2.5 bg-[#767676] rounded-full animate-[pulse_1.5s_ease-in-out_0.2s_infinite]"></div>
-                                          <div className="w-2.5 h-2.5 bg-[#767676] rounded-full animate-[pulse_1.5s_ease-in-out_0.4s_infinite]"></div>
-                                       </div>
-                                    </div>
-                                 ) : (
-                                    <div className="flex-1 overflow-y-auto scroll-smooth px-2 pb-6">
-                                       <div className="px-4 py-2">
-                                          <h3 className="text-[16px] font-bold text-black">Seen</h3>
-                                       </div>
-                                       {notificationsList.length > 0 ? (
-                                          notificationsList.map((item, i) => (
-                                             <div key={i} className={`relative flex items-center gap-3 px-4 py-3 transition-colors cursor-pointer group rounded-2xl ${activeNotificationMenu === i ? 'bg-[#E9E9E9]' : 'hover:bg-gray-50'}`}>
-                                                <div className="w-16 h-16 rounded-[12px] overflow-hidden shrink-0 bg-[#E9E9E9]">
-                                                   <img 
-                                                      src={`https://images.unsplash.com/photo-${item.image}?w=150&h=150&fit=crop`} 
-                                                      alt="" 
-                                                      className="w-full h-full object-cover" 
-                                                   />
-                                                </div>
-                                                <div className="flex-1 min-w-0 pr-2">
-                                                   <span className="text-[15px] leading-tight text-black font-semibold line-clamp-2">
-                                                      {item.title}
-                                                   </span>
-                                                </div>
-                                                <div className="flex flex-col items-end gap-1 shrink-0 relative">
-                                                   <span className="text-[12px] text-[#767676]">{item.time}</span>
-                                                   <button 
-                                                      onClick={(e) => {
-                                                         e.stopPropagation();
-                                                         setActiveNotificationMenu(activeNotificationMenu === i ? null : i);
-                                                      }}
-                                                      className={`flex items-center justify-center w-8 h-8 rounded-full transition-colors ${activeNotificationMenu === i ? 'bg-white shadow-sm' : 'text-[#111] hover:bg-gray-200'}`}
-                                                   >
-                                                      <span className="text-xl font-bold mb-3">...</span>
-                                                   </button>
-
-                                                   {/* Action Popup */}
-                                                   {activeNotificationMenu === i && (
-                                                      <div className="absolute top-10 right-0 z-[110] bg-white rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.15)] py-2 w-[220px] animate-in fade-in zoom-in-95 duration-100 origin-top-right">
-                                                         <button 
-                                                            onClick={(e) => {
-                                                               e.stopPropagation();
-                                                               handleDeleteNotification(i);
-                                                            }}
-                                                            className="w-full text-left px-4 py-2 hover:bg-gray-100 text-[15px] font-bold text-black group/item"
-                                                         >
-                                                            Delete update
-                                                         </button>
-                                                         <button className="w-full text-left px-4 py-2 hover:bg-gray-100 text-[15px] font-bold text-black group/item">
-                                                            View notification settings
-                                                         </button>
-                                                      </div>
-                                                   )}
-                                                </div>
-                                             </div>
-                                          ))
-                                       ) : (
-                                          <div className="flex-1 flex items-center justify-center pt-20 text-[#767676] font-medium">
-                                             No more updates!
-                                          </div>
-                                       )}
-                                    </div>
-                                 )}
+                          <div className="flex-1 overflow-hidden flex flex-col">
+                            {loadingNotifications ? (
+                              <div className="flex-1 flex flex-col items-center justify-center">
+                                <div className="flex items-center gap-2">
+                                  <div className="w-2.5 h-2.5 bg-[#767676] rounded-full animate-[pulse_1.5s_ease-in-out_infinite]"></div>
+                                  <div className="w-2.5 h-2.5 bg-[#767676] rounded-full animate-[pulse_1.5s_ease-in-out_0.2s_infinite]"></div>
+                                  <div className="w-2.5 h-2.5 bg-[#767676] rounded-full animate-[pulse_1.5s_ease-in-out_0.4s_infinite]"></div>
+                                </div>
                               </div>
+                            ) : (
+                              <div className="flex-1 overflow-y-auto scroll-smooth px-2 pb-6">
+                                <div className="px-4 py-2">
+                                  <h3 className="text-[16px] font-bold text-black">Seen</h3>
+                                </div>
+                                {notificationsList.length > 0 ? (
+                                  notificationsList.map((item, i) => (
+                                    <div key={i} className={`relative flex items-center gap-3 px-4 py-3 transition-colors cursor-pointer group rounded-2xl ${activeNotificationMenu === i ? 'bg-[#E9E9E9]' : 'hover:bg-gray-50'}`}>
+                                      <div className="w-16 h-16 rounded-[12px] overflow-hidden shrink-0 bg-[#E9E9E9]">
+                                        <img
+                                          src={`https://images.unsplash.com/photo-${item.image}?w=150&h=150&fit=crop`}
+                                          alt=""
+                                          className="w-full h-full object-cover"
+                                        />
+                                      </div>
+                                      <div className="flex-1 min-w-0 pr-2">
+                                        <span className="text-[15px] leading-tight text-black font-semibold line-clamp-2">
+                                          {item.title}
+                                        </span>
+                                      </div>
+                                      <div className="flex flex-col items-end gap-1 shrink-0 relative">
+                                        <span className="text-[12px] text-[#767676]">{item.time}</span>
+                                        <button
+                                          onClick={(e) => {
+                                            e.stopPropagation();
+                                            setActiveNotificationMenu(activeNotificationMenu === i ? null : i);
+                                          }}
+                                          className={`flex items-center justify-center w-8 h-8 rounded-full transition-colors ${activeNotificationMenu === i ? 'bg-white shadow-sm' : 'text-[#111] hover:bg-gray-200'}`}
+                                        >
+                                          <span className="text-xl font-bold mb-3">...</span>
+                                        </button>
+
+                                        {/* Action Popup */}
+                                        {activeNotificationMenu === i && (
+                                          <div className="absolute top-10 right-0 z-[110] bg-white rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.15)] py-2 w-[220px] animate-in fade-in zoom-in-95 duration-100 origin-top-right">
+                                            <button
+                                              onClick={(e) => {
+                                                e.stopPropagation();
+                                                handleDeleteNotification(i);
+                                              }}
+                                              className="w-full text-left px-4 py-2 hover:bg-gray-100 text-[15px] font-bold text-black group/item"
+                                            >
+                                              Delete update
+                                            </button>
+                                            <button className="w-full text-left px-4 py-2 hover:bg-gray-100 text-[15px] font-bold text-black group/item">
+                                              View notification settings
+                                            </button>
+                                          </div>
+                                        )}
+                                      </div>
+                                    </div>
+                                  ))
+                                ) : (
+                                  <div className="flex-1 flex items-center justify-center pt-20 text-[#767676] font-medium">
+                                    No more updates!
+                                  </div>
+                                )}
+                              </div>
+                            )}
+                          </div>
                         </div>
                       </div>
                     )}
@@ -374,7 +374,7 @@ export function Sidebar() {
                   className="flex flex-col items-center justify-center transition-colors outline-none cursor-pointer"
                   aria-label={item.label}
                 >
-                  <div className={`w-12 h-12 flex items-center justify-center rounded-full transition-colors ${isActive ? 'bg-black text-white' : 'text-[#767676] hover:bg-gray-100 hover:text-black'}`}>
+                  <div className={`w-12 h-12 flex items-center justify-center rounded-full transition-colors ${isActive ? 'bg-black text-white' : 'text-black hover:bg-gray-100 hover:text-black'}`}>
                     <Icon className="w-6 h-6" />
                   </div>
                 </Link>
@@ -389,7 +389,7 @@ export function Sidebar() {
               aria-label="Settings & Support"
               aria-expanded={isSettingsOpen}
             >
-              <div className={`w-12 h-12 flex items-center justify-center rounded-full transition-colors ${pathname === '/settings' || isSettingsOpen ? 'bg-black text-white' : 'text-[#767676] hover:bg-gray-100 hover:text-black'}`}>
+              <div className={`w-12 h-12 flex items-center justify-center rounded-full transition-colors ${pathname === '/settings' || isSettingsOpen ? 'bg-black text-white' : 'text-black hover:bg-gray-100 hover:text-black'}`}>
                 <PinterestIcons.Settings className="w-6 h-6" />
               </div>
             </button>
