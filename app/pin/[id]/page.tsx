@@ -205,15 +205,15 @@ export default function PinDetailPage() {
 
             {/* Content */}
             <div className="px-6 py-4">
-              <!-- Title -->
+              {/* Title */}
               <h1 className="text-xl font-bold text-black mb-2">{pin.title}</h1>
               
-              <!-- Description placeholder -->
+              {/* Description placeholder */}
               <p className="text-sm text-gray-600 mb-4">
                 This is a beautiful pin with amazing content. Click Save to add it to your collection.
               </p>
 
-              <!-- Author Section -->
+              {/* Author Section */}
               <div className="flex items-center justify-between py-4">
                 <div className="flex items-center gap-3">
                   <img
@@ -239,7 +239,7 @@ export default function PinDetailPage() {
                 </button>
               </div>
 
-              <!-- Comments Section -->
+              {/* Comments Section */}
               <div className="mt-4">
                 <h3 className="font-semibold text-black mb-3">Comments</h3>
                 
@@ -305,7 +305,7 @@ export default function PinDetailPage() {
                     isLiked ? 'text-[#E60023]' : 'hover:bg-gray-100'
                   }`}
                 >
-                  <PinterestIcons.Heart className={isLiked ? 'fill-[#E60023]' : ''} />
+                  <PinterestIcons.Heart />
                 </button>
               </div>            </div>
           </div>

@@ -95,7 +95,7 @@ export function Navbar() {
   }, [])
 
   return (
-    <header className="fixed top-0 left-0 right-0 h-[80px] bg-white z-50 px-4 flex items-center gap-4">
+    <header className="sticky top-0 h-20 bg-white z-30 px-4 flex items-center gap-2">
       {/* Logo */}
       <Link href="/" className="flex items-center justify-center w-12 h-12 rounded-full hover:bg-gray-100 transition-colors flex-shrink-0">
         <PinterestIcons.Logo />

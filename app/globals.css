@@ -98,6 +98,22 @@
   animation: scroll-up 30s linear infinite;
 }
 
+/* Settings panel animation */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-in {
+  animation: slideIn 0.15s ease-out;
+}
+
 /* Smooth scroll behavior */
 html {
   scroll-behavior: smooth;
