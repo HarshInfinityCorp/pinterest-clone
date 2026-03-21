@@ -1,7 +1,9 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { Search, X } from 'lucide-react'
+import Link from 'next/link'
+import { Search, X, Check } from 'lucide-react'
+
 
 // Pinterest uses custom SVG icons - these are the exact ones
 const PinterestIcons = {
@@ -83,12 +85,16 @@ export function Navbar() {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [isProfileOpen, setIsProfileOpen] = useState(false)
   const searchRef = useRef<HTMLDivElement>(null)
+  const dropdownRef = useRef<HTMLDivElement>(null)
 
   // Close search dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
         setIsSearchOpen(false)
+      }
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsProfileOpen(false)
       }
     }
     document.addEventListener('mousedown', handleClickOutside)
@@ -130,28 +136,35 @@ export function Navbar() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onFocus={() => setIsSearchOpen(true)}
-            className={`w-full h-12 pl-12 pr-12 rounded-xl border-none outline-none transition-all text-base font-semibold placeholder:text-pinterest-mediumGray ${isSearchOpen
+            className={`w-full h-12 pl-12 pr-[140px] rounded-xl border-none outline-none transition-all text-base font-semibold placeholder:text-pinterest-mediumGray ${isSearchOpen
               ? 'bg-white ring-4 ring-blue-100/50 shadow-lg'
               : 'bg-[#e5e5e0] focus:ring-4 focus:ring-blue-100/50'
               }`}
           />
-          {/* Mic icon on right — hidden when there's typed text */}
+          {/* Mic icon & Your Pins on right — hidden when there's typed text */}
           {!searchQuery ? (
-            <button
-              type="button"
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-pinterest-black hover:opacity-70 transition-opacity"
-              aria-label="Search by voice"
-            >
-              <svg height="24" viewBox="0 0 24 24" width="24" fill="currentColor">
-                <path d="M12 0a5 5 0 0 0-5 5v6a5 5 0 0 0 10 0V5a5 5 0 0 0-5-5m0 14a3 3 0 0 1-3-3V5a3 3 0 1 1 6 0v6a3 3 0 0 1-3 3M3 9v2a9 9 0 0 0 8 8.95V24h2v-4.05A9 9 0 0 0 21 11V9h-2v2a7 7 0 1 1-14 0V9z" />
-              </svg>
-            </button>
+            <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center">
+              <button
+                type="button"
+                className="w-8 h-8 flex items-center justify-center text-black hover:opacity-70 transition-opacity"
+                aria-label="Search by voice"
+              >
+                <svg height="20" viewBox="0 0 24 24" width="20" fill="currentColor">
+                  <path d="M12 0a5 5 0 0 0-5 5v6a5 5 0 0 0 10 0V5a5 5 0 0 0-5-5m0 14a3 3 0 0 1-3-3V5a3 3 0 1 1 6 0v6a3 3 0 0 1-3 3M3 9v2a9 9 0 0 0 8 8.95V24h2v-4.05A9 9 0 0 0 21 11V9h-2v2a7 7 0 1 1-14 0V9z" />
+                </svg>
+              </button>
+              <div className="w-[1px] h-6 bg-gray-300 mx-1"></div>
+              <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-full hover:bg-gray-200/50 transition-colors text-sm font-semibold text-black">
+                Your Pins
+                <PinterestIcons.ChevronDown />
+              </button>
+            </div>
           ) : (
             <button
               onClick={() => setSearchQuery('')}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-pinterest-mediumGray hover:text-pinterest-black transition-colors"
+              className="absolute right-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full flex items-center justify-center hover:bg-gray-200 text-black transition-colors"
             >
-              <X size={18} />
+              <X size={18} strokeWidth={2.5} />
             </button>
           )}
         </div>
@@ -233,23 +246,70 @@ export function Navbar() {
       </div>
 
       {/* Right Section - Profile only */}
-      <div className="flex items-center gap-1 flex-shrink-0">
-        <button
-          onClick={() => setIsProfileOpen(!isProfileOpen)}
-          className="flex items-center gap-1 p-1.5 rounded-full hover:bg-pinterest-hoverGray transition-colors"
+      <div className="flex items-center gap-2 flex-shrink-0 relative" ref={dropdownRef}>
+
+        {/* 1. Avatar button → navigates to /profile */}
+        <Link
+          href="/profile"
+          className="w-10 h-10 rounded-full bg-[#fbd4d6] flex items-center justify-center flex-shrink-0 border-2 border-black hover:opacity-80 transition-opacity"
         >
-          {/* Avatar circle — pink bg with initial letter */}
-          <div className="w-8 h-8 rounded-full bg-pink-200 flex items-center justify-center text-sm font-bold text-pink-700 overflow-hidden flex-shrink-0">
-            <img
-              src="https://i.pravatar.cc/150?u=pinterestuser"
-              alt="Profile"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="text-pinterest-mediumGray">
-            <PinterestIcons.ChevronDown />
-          </div>
+          <span className="text-black font-semibold text-sm">H</span>
+        </Link>
+
+        {/* 2. Chevron button → opens account dropdown */}
+        <button
+          id="profile-dropdown-trigger"
+          onClick={() => setIsProfileOpen(!isProfileOpen)}
+          className="flex items-center justify-center w-6 h-6 rounded-full bg-[#f1f1f1] hover:bg-gray-200 transition-colors text-black"
+          aria-label="Account options"
+        >
+          <PinterestIcons.ChevronDown />
         </button>
+
+        {/* Account dropdown */}
+        {isProfileOpen && (
+          <div className="absolute top-full right-0 mt-2 w-72 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-50">
+
+            {/* Currently in section */}
+            <div className="px-5 pt-4 pb-2">
+              <p className="text-xs text-gray-400 font-medium mb-3">Currently in</p>
+              <div className="flex items-center gap-3">
+                {/* Avatar */}
+                <div className="w-10 h-10 rounded-full bg-pink-200 flex items-center justify-center text-base font-bold text-pink-600 flex-shrink-0">
+                  H
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-bold text-gray-900">Harsh Vaddoriya</p>
+                  <div className="flex items-center gap-1">
+                    <p className="text-xs text-gray-500">Personal</p>
+                    <Check size={13} className="text-gray-700 flex-shrink-0" strokeWidth={2.5} />
+                  </div>
+                  <p className="text-xs text-gray-400 truncate">harshvaddoriya0319@gm...</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="h-px bg-gray-100 my-1 mx-5" />
+
+            {/* Convert to business */}
+            <button className="w-full text-left px-5 py-3 text-sm font-semibold text-gray-900 hover:bg-gray-50 transition-colors">
+              Convert to business
+            </button>
+
+            <div className="h-px bg-gray-100 my-1 mx-5" />
+
+            {/* Your accounts */}
+            <div className="px-5 pt-3 pb-1">
+              <p className="text-xs text-gray-400 font-medium mb-1">Your accounts</p>
+            </div>
+            <button className="w-full text-left px-5 py-3 text-sm font-semibold text-gray-900 hover:bg-gray-50 transition-colors">
+              Add Pinterest account
+            </button>
+            <button className="w-full text-left px-5 py-3 mb-2 text-sm font-semibold text-gray-900 hover:bg-gray-50 transition-colors">
+              Log out
+            </button>
+          </div>
+        )}
       </div>
     </header>
   )
