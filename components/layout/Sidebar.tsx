@@ -1,7 +1,20 @@
 'use client'
 
+import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+
+const CloseIcon = () => (
+  <svg height="16" width="16" viewBox="0 0 24 24" aria-hidden="true" role="img" className="text-black">
+    <path fill="currentColor" d="M22.8 3.5 20.5 1.2 12 9.7 3.5 1.2 1.2 3.5l8.5 8.5-8.5 8.5 2.3 2.3 8.5-8.5 8.5 8.5 2.3-2.3-8.5-8.5z" />
+  </svg>
+)
+
+const ExternalLinkIcon = () => (
+  <svg height="14" width="14" viewBox="0 0 24 24" aria-hidden="true" role="img" className="text-[#111]">
+    <path fill="currentColor" d="M10 22H2V2h12v5h-2V4H4v16h4v2zm12-16v10h-2V5.41l-9.29 9.3-1.42-1.42L18.59 4H12V2h10z" />
+  </svg>
+)
 
 // Pinterest exact SVG icons from example.html
 const PinterestIcons = {
@@ -56,12 +69,43 @@ const topNavItems = [
   { icon: PinterestIcons.Messages, label: 'Messages', href: '/messages' },
 ]
 
+const settingsTopLinks = [
+  { label: 'Settings', href: '/settings', external: false, outline: true },
+  { label: 'Refine your recommendations', href: '/edit/recommendations', external: false },
+  { label: 'Link to Pinterest', href: '/link-to-pinterest', external: false },
+  { label: 'Reports and violations center', href: '/reports', external: false },
+  { label: 'Install the Chrome app', href: '#', external: false },
+  { label: 'Be a beta tester', href: '#', external: true },
+]
+
+const supportLinks = [
+  { label: 'Help center', href: 'https://help.pinterest.com', external: true },
+  { label: 'Create widget', href: '/widgets', external: true },
+  { label: 'Removals', href: '/removals', external: true },
+  { label: 'Personalized Ads', href: '/personalized-ads', external: true },
+  { label: 'Your privacy rights', href: '/privacy-rights', external: false },
+  { label: 'Privacy policy', href: '/privacy-policy', external: true },
+  { label: 'Terms of service', href: '/tos', external: true },
+]
+
 export function Sidebar() {
   const pathname = usePathname()
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false)
+  const settingsRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (settingsRef.current && !settingsRef.current.contains(event.target as Node)) {
+        setIsSettingsOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
 
   return (
-    <nav aria-label="primary" className="fixed left-0 top-0 h-screen w-[72px] bg-white z-50 hidden lg:flex flex-col border-r border-gray-200 overflow-y-auto overflow-x-hidden">
-      <div className="flex flex-col justify-between h-full pt-6 pb-6" style={{ minHeight: 'max-content' }}>
+    <nav aria-label="primary" className="fixed left-0 top-0 h-screen w-[72px] bg-white z-50 hidden lg:flex flex-col border-r border-gray-200 overflow-visible">
+      <div className="flex flex-col justify-between h-full pt-6 pb-6 relative" style={{ minHeight: 'max-content' }}>
         <div className="flex flex-col items-center gap-6">
           <Link
             href="/home"
@@ -79,7 +123,7 @@ export function Sidebar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="flex flex-col items-center justify-center transition-colors outline-none"
+                className="flex flex-col items-center justify-center transition-colors outline-none cursor-pointer"
                 aria-label={item.label}
               >
                 <div className={`w-12 h-12 flex items-center justify-center rounded-full transition-colors ${isActive ? 'bg-black text-white' : 'text-[#767676] hover:bg-gray-100 hover:text-black'}`}>
@@ -90,19 +134,91 @@ export function Sidebar() {
           })}
         </div>
 
-        <div className="flex flex-col items-center mt-6">
-          <Link
-            href="/settings"
-            className="flex flex-col items-center justify-center transition-colors outline-none"
+        <div className="flex flex-col items-center mt-6 relative" ref={settingsRef}>
+          <button
+            onClick={() => setIsSettingsOpen(!isSettingsOpen)}
+            className="flex flex-col items-center justify-center transition-colors outline-none w-full cursor-pointer"
             aria-label="Settings & Support"
+            aria-expanded={isSettingsOpen}
           >
-            <div className={`w-12 h-12 flex items-center justify-center rounded-full transition-colors ${pathname === '/settings' ? 'bg-black text-white' : 'text-[#767676] hover:bg-gray-100 hover:text-black'}`}>
+            <div className={`w-12 h-12 flex items-center justify-center rounded-full transition-colors ${pathname === '/settings' || isSettingsOpen ? 'bg-black text-white' : 'text-[#767676] hover:bg-gray-100 hover:text-black'}`}>
               <PinterestIcons.Settings className="w-6 h-6" />
             </div>
-          </Link>
+          </button>
+
+          {/* Settings Click Modal */}
+          {isSettingsOpen && (
+            <div className="absolute left-[70px] bottom-[-20px] z-[100] pl-2 cursor-default">
+              <div className="bg-white rounded-[16px] shadow-[0_2px_16px_rgba(0,0,0,0.15)] w-[392px] max-w-[392px] flex flex-col border border-gray-100 pb-2">
+                
+                {/* Header */}
+                <div className="flex items-center gap-2 px-4 py-3 shrink-0 mt-1">
+                  <div className="p-2 -ml-2 rounded-full hover:bg-gray-100 cursor-pointer transition-colors" onClick={() => setIsSettingsOpen(false)}>
+                    <CloseIcon />
+                  </div>
+                  <h2 className="text-[16px] font-semibold text-black tracking-tight ml-1">Settings & Support</h2>
+                </div>
+
+                <div className="px-2">
+                  <div className="flex flex-col space-y-[2px]">
+                    {settingsTopLinks.map((item, index) => (
+                      <Link 
+                        key={index} 
+                        href={item.href} 
+                        target={item.external ? "_blank" : undefined}
+                        onClick={() => setIsSettingsOpen(false)}
+                        className={`flex items-center justify-between px-3 py-2 rounded-[8px] hover:bg-gray-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0060df] font-medium text-[15px] text-[#111] ${item.outline ? 'ring-1 ring-[#0060df]' : ''}`}
+                      >
+                        <span>{item.label}</span>
+                        {item.external && <ExternalLinkIcon />}
+                      </Link>
+                    ))}
+                  </div>
+
+                  {/* Support Section */}
+                  <div className="mt-4 mb-2 px-3">
+                    <h3 className="text-[12px] text-[#767676] font-normal leading-tight">Support</h3>
+                  </div>
+                  <div className="flex flex-col space-y-[2px]">
+                    {supportLinks.map((item, index) => (
+                      <Link 
+                        key={index} 
+                        href={item.href} 
+                        target={item.external ? "_blank" : undefined}
+                        onClick={() => setIsSettingsOpen(false)}
+                        className="flex items-center justify-between px-3 py-2 rounded-[8px] hover:bg-gray-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0060df] font-medium text-[15px] text-[#111]"
+                      >
+                        <span>{item.label}</span>
+                        {item.external && <ExternalLinkIcon />}
+                      </Link>
+                    ))}
+                  </div>
+
+                  {/* Resources Section */}
+                  <div className="mt-4 mb-2 px-3">
+                    <h3 className="text-[12px] text-[#767676] font-normal mb-3 leading-tight">Resources</h3>
+                    <div className="flex flex-col gap-[8px]">
+                      <div className="flex gap-[14px]">
+                        <Link href="/about" className="text-[14px] text-[#0060df] hover:underline font-medium" onClick={() => setIsSettingsOpen(false)}>About</Link>
+                        <Link href="/blog" className="text-[14px] text-[#0060df] hover:underline font-medium" onClick={() => setIsSettingsOpen(false)}>Blog</Link>
+                        <Link href="/business" className="text-[14px] text-[#0060df] hover:underline font-medium" onClick={() => setIsSettingsOpen(false)}>Businesses</Link>
+                      </div>
+                      <div className="flex gap-[14px]">
+                        <Link href="/careers" className="text-[14px] text-[#0060df] hover:underline font-medium" onClick={() => setIsSettingsOpen(false)}>Careers</Link>
+                        <Link href="/developers" className="text-[14px] text-[#0060df] hover:underline font-medium" onClick={() => setIsSettingsOpen(false)}>Developers</Link>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          )}
+
         </div>
       </div>
     </nav>
   )
 }
+
 
