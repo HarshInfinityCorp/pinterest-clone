@@ -12,7 +12,7 @@ export default function MainLayout({
       <Sidebar />
 
       {/* Right-side content: navbar + page content, offset from sidebar */}
-      <div className="lg:ml-16 flex flex-col min-h-screen">
+      <div className="lg:ml-[72px] flex flex-col min-h-screen">
         {/* Fixed navbar spans the right side */}
         <Navbar />
         {/* Page content sits below the navbar */}
