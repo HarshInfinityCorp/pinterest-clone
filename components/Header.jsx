@@ -53,7 +53,7 @@ export default function Header({ isLoggedIn = false }) {
 
   return (
     <header className="sticky top-0 z-50 flex items-center gap-4 px-4 py-3 bg-white">
-      <Link href="/home" className="flex-shrink-0">
+      <Link href="/" className="flex-shrink-0">
         <svg
           className="w-8 h-8 text-[#E60023]"
           viewBox="0 0 24 24"
@@ -64,14 +64,14 @@ export default function Header({ isLoggedIn = false }) {
       </Link>
 
       <Link
-        href="/home"
+        href="/"
         className="px-4 py-2 font-semibold text-white bg-gray-900 rounded-full text-sm hidden sm:block"
       >
         Home
       </Link>
 
       <Link
-        href="/create"
+        href="/pin-creation-tool"
         className="px-4 py-2 font-semibold text-gray-800 hover:bg-gray-100 rounded-full text-sm hidden sm:flex items-center gap-1"
       >
         Create

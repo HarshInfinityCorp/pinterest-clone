@@ -102,7 +102,7 @@ export function Navbar() {
   }, [])
 
   return (
-    <header className="fixed top-0 left-0 lg:left-16 right-0 h-16 bg-white z-40 px-4 flex items-center gap-2">
+    <header className="fixed top-2 left-0 lg:left-16 right-0 h-16 bg-white z-40 px-4 flex items-center gap-2">
 
       {/* Navigation Tabs - Exact Pinterest Style */}
       {/* <nav className="hidden md:flex items-center gap-0">
@@ -153,11 +153,11 @@ export function Navbar() {
                   <path d="M12 0a5 5 0 0 0-5 5v6a5 5 0 0 0 10 0V5a5 5 0 0 0-5-5m0 14a3 3 0 0 1-3-3V5a3 3 0 1 1 6 0v6a3 3 0 0 1-3 3M3 9v2a9 9 0 0 0 8 8.95V24h2v-4.05A9 9 0 0 0 21 11V9h-2v2a7 7 0 1 1-14 0V9z" />
                 </svg>
               </button>
-              <div className="w-[1px] h-6 bg-gray-300 mx-1"></div>
-              <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-full hover:bg-gray-200/50 transition-colors text-sm font-semibold text-black">
+              {/* <div className="w-[1px] h-6 bg-gray-300 mx-1"></div> */}
+              {/* <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-full hover:bg-gray-200/50 transition-colors text-sm font-semibold text-black">
                 Your Pins
                 <PinterestIcons.ChevronDown />
-              </button>
+              </button> */}
             </div>
           ) : (
             <button
@@ -251,7 +251,7 @@ export function Navbar() {
         {/* 1. Avatar button → navigates to /profile */}
         <Link
           href="/profile"
-          className="w-10 h-10 rounded-full bg-[#fbd4d6] flex items-center justify-center flex-shrink-0 border-2 border-black hover:opacity-80 transition-opacity"
+          className="w-10 h-10 rounded-full bg-[#fbd4d6] flex items-center justify-center flex-shrink-0 hover:opacity-80 transition-opacity"
         >
           <span className="text-black font-semibold text-sm">H</span>
         </Link>
@@ -260,7 +260,7 @@ export function Navbar() {
         <button
           id="profile-dropdown-trigger"
           onClick={() => setIsProfileOpen(!isProfileOpen)}
-          className="flex items-center justify-center w-6 h-6 rounded-full bg-[#f1f1f1] hover:bg-gray-200 transition-colors text-black"
+          className="flex items-center justify-center w-6 h-6 rounded-full hover:bg-gray-200 transition-colors text-black"
           aria-label="Account options"
         >
           <PinterestIcons.ChevronDown />
@@ -275,11 +275,11 @@ export function Navbar() {
               <p className="text-xs text-gray-400 font-medium mb-3">Currently in</p>
               <div className="flex items-center gap-3">
                 {/* Avatar */}
-                <div className="w-10 h-10 rounded-full bg-pink-200 flex items-center justify-center text-base font-bold text-pink-600 flex-shrink-0">
+                <div className="w-12 h-12 rounded-full bg-[#fbd4d6] flex items-center justify-center text-base font-bold text-black flex-shrink-0">
                   H
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-bold text-gray-900">Harsh Vaddoriya</p>
+                  <p className="text-base font-bold text-gray-900">Harsh Vaddoriya</p>
                   <div className="flex items-center gap-1">
                     <p className="text-xs text-gray-500">Personal</p>
                     <Check size={13} className="text-gray-700 flex-shrink-0" strokeWidth={2.5} />
@@ -292,7 +292,7 @@ export function Navbar() {
             <div className="h-px bg-gray-100 my-1 mx-5" />
 
             {/* Convert to business */}
-            <button className="w-full text-left px-5 py-3 text-sm font-semibold text-gray-900 hover:bg-gray-50 transition-colors">
+            <button className="w-full text-left px-5 py-3 text-base font-bold text-gray-900 hover:bg-gray-50 transition-colors">
               Convert to business
             </button>
 
@@ -302,10 +302,10 @@ export function Navbar() {
             <div className="px-5 pt-3 pb-1">
               <p className="text-xs text-gray-400 font-medium mb-1">Your accounts</p>
             </div>
-            <button className="w-full text-left px-5 py-3 text-sm font-semibold text-gray-900 hover:bg-gray-50 transition-colors">
+            <button className="w-full text-left px-5 py-3 text-base font-bold text-gray-900 hover:bg-gray-50 transition-colors">
               Add Pinterest account
             </button>
-            <button className="w-full text-left px-5 py-3 mb-2 text-sm font-semibold text-gray-900 hover:bg-gray-50 transition-colors">
+            <button className="w-full text-left px-5 py-3 mb-2 text-base font-bold text-gray-900 hover:bg-gray-50 transition-colors">
               Log out
             </button>
           </div>

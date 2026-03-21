@@ -61,10 +61,10 @@ const PinterestIcons = {
 }
 
 const topNavItems = [
-  { icon: PinterestIcons.Home, label: 'Home', href: '/home' },
-  { icon: PinterestIcons.Explore, label: 'Explore', href: '/explore' },
+  { icon: PinterestIcons.Home, label: 'Home', href: '/' },
+  { icon: PinterestIcons.Explore, label: 'Explore', href: '/today' },
   { icon: PinterestIcons.Boards, label: 'Your boards', href: '/profile' },
-  { icon: PinterestIcons.Create, label: 'Create', href: '/create' },
+  { icon: PinterestIcons.Create, label: 'Create', href: '/pin-creation-tool' },
   { icon: PinterestIcons.Notifications, label: 'Notifications', href: '/notifications' },
   { icon: PinterestIcons.Messages, label: 'Messages', href: '/messages' },
 ]
@@ -108,8 +108,8 @@ export function Sidebar() {
       <div className="flex flex-col justify-between h-full pt-6 pb-6 relative" style={{ minHeight: 'max-content' }}>
         <div className="flex flex-col items-center gap-6">
           <Link
-            href="/home"
-            className="flex items-center justify-center w-12 h-12 rounded-full hover:bg-gray-100 transition-colors flex-shrink-0"
+            href="/"
+            className="flex items-center justify-center w-15 h-15 rounded-full hover:bg-gray-100 transition-colors flex-shrink-0"
             aria-label="Pinterest"
           >
             <PinterestIcons.Logo className="w-6 h-6" />
@@ -150,7 +150,7 @@ export function Sidebar() {
           {isSettingsOpen && (
             <div className="absolute left-[70px] bottom-[-20px] z-[100] pl-2 cursor-default">
               <div className="bg-white rounded-[16px] shadow-[0_2px_16px_rgba(0,0,0,0.15)] w-[392px] max-w-[392px] flex flex-col border border-gray-100 pb-2">
-                
+
                 {/* Header */}
                 <div className="flex items-center gap-2 px-4 py-3 shrink-0 mt-1">
                   <div className="p-2 -ml-2 rounded-full hover:bg-gray-100 cursor-pointer transition-colors" onClick={() => setIsSettingsOpen(false)}>
@@ -162,9 +162,9 @@ export function Sidebar() {
                 <div className="px-2">
                   <div className="flex flex-col space-y-[2px]">
                     {settingsTopLinks.map((item, index) => (
-                      <Link 
-                        key={index} 
-                        href={item.href} 
+                      <Link
+                        key={index}
+                        href={item.href}
                         target={item.external ? "_blank" : undefined}
                         onClick={() => setIsSettingsOpen(false)}
                         className={`flex items-center justify-between px-3 py-2 rounded-[8px] hover:bg-gray-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0060df] font-medium text-[15px] text-[#111] ${item.outline ? 'ring-1 ring-[#0060df]' : ''}`}
@@ -181,9 +181,9 @@ export function Sidebar() {
                   </div>
                   <div className="flex flex-col space-y-[2px]">
                     {supportLinks.map((item, index) => (
-                      <Link 
-                        key={index} 
-                        href={item.href} 
+                      <Link
+                        key={index}
+                        href={item.href}
                         target={item.external ? "_blank" : undefined}
                         onClick={() => setIsSettingsOpen(false)}
                         className="flex items-center justify-between px-3 py-2 rounded-[8px] hover:bg-gray-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0060df] font-medium text-[15px] text-[#111]"

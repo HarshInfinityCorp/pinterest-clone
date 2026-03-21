@@ -13,7 +13,7 @@ export default function AuthPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Simulate login - redirect to home
-    router.push("/home");
+    router.push("/");
   };
 
   return (
