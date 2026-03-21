@@ -1,54 +1,52 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { Search, Bell, MessageCircle, ChevronDown, X } from 'lucide-react'
+import { Search, X } from 'lucide-react'
 
 // Pinterest uses custom SVG icons - these are the exact ones
 const PinterestIcons = {
   // Pinterest logo
   Logo: () => (
     <svg viewBox="0 0 24 24" className="w-6 h-6" fill="#E60023">
-      <path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/>
+      <path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z" />
     </svg>
   ),
 
   // Notification bell (outline style Pinterest uses)
   Notification: () => (
     <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
-      <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+      <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+      <path d="M13.73 21a2 2 0 0 1-3.46 0" />
     </svg>
   ),
 
   // Message bubble (outline style)
   Message: () => (
     <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
     </svg>
   ),
 
   // Chevron down small
   ChevronDown: () => (
     <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="6 9 12 15 18 9"/>
+      <polyline points="6 9 12 15 18 9" />
     </svg>
   ),
 
   // Search icon
   Search: () => (
     <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="11" cy="11" r="8"/>
-      <path d="m21 21-4.35-4.35"/>
+      <circle cx="11" cy="11" r="8" />
+      <path d="m21 21-4.35-4.35" />
     </svg>
   ),
 
   // Close X icon
   Close: () => (
     <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <line x1="18" y1="6" x2="6" y2="18"/>
-      <line x1="6" y1="6" x2="18" y2="18"/>
+      <line x1="18" y1="6" x2="6" y2="18" />
+      <line x1="6" y1="6" x2="18" y2="18" />
     </svg>
   )
 }
@@ -85,13 +83,6 @@ export function Navbar() {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [isProfileOpen, setIsProfileOpen] = useState(false)
   const searchRef = useRef<HTMLDivElement>(null)
-  const pathname = usePathname()
-
-  const navItems = [
-    { label: 'Home', href: '/home' },
-    { label: 'Explore', href: '/explore' },
-    { label: 'Create', href: '/create' },
-  ]
 
   // Close search dropdown when clicking outside
   useEffect(() => {
@@ -105,14 +96,10 @@ export function Navbar() {
   }, [])
 
   return (
-    <header className="fixed top-0 left-0 right-0 h-20 bg-white z-50 px-4 flex items-center gap-2">
-      {/* Logo */}
-      <Link href="/home" className="flex items-center justify-center w-12 h-12 rounded-full hover:bg-pinterest-hoverGray transition-colors flex-shrink-0">
-        <PinterestIcons.Logo />
-      </Link>
+    <header className="fixed top-0 left-0 lg:left-16 right-0 h-16 bg-white z-40 px-4 flex items-center gap-2">
 
       {/* Navigation Tabs - Exact Pinterest Style */}
-      <nav className="hidden md:flex items-center gap-0">
+      {/* <nav className="hidden md:flex items-center gap-0">
         {navItems.map((item) => {
           const isActive = pathname === item.href
           return (
@@ -129,7 +116,7 @@ export function Navbar() {
             </Link>
           )
         })}
-      </nav>
+      </nav> */}
 
       {/* Search Bar with Dropdown */}
       <div className="flex-1 min-w-0 relative" ref={searchRef}>
@@ -143,14 +130,24 @@ export function Navbar() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onFocus={() => setIsSearchOpen(true)}
-            className={`w-full h-12 pl-12 pr-10 rounded-full border-none outline-none transition-all text-base placeholder:text-pinterest-mediumGray ${
-              isSearchOpen 
-                ? 'bg-white ring-4 ring-blue-100/50 shadow-lg' 
-                : 'bg-pinterest-lightGray focus:ring-4 focus:ring-blue-100/50'
-            }`}
+            className={`w-full h-12 pl-12 pr-12 rounded-xl border-none outline-none transition-all text-base font-semibold placeholder:text-pinterest-mediumGray ${isSearchOpen
+              ? 'bg-white ring-4 ring-blue-100/50 shadow-lg'
+              : 'bg-[#e5e5e0] focus:ring-4 focus:ring-blue-100/50'
+              }`}
           />
-          {searchQuery && (
-            <button 
+          {/* Mic icon on right — hidden when there's typed text */}
+          {!searchQuery ? (
+            <button
+              type="button"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-pinterest-black hover:opacity-70 transition-opacity"
+              aria-label="Search by voice"
+            >
+              <svg height="24" viewBox="0 0 24 24" width="24" fill="currentColor">
+                <path d="M12 0a5 5 0 0 0-5 5v6a5 5 0 0 0 10 0V5a5 5 0 0 0-5-5m0 14a3 3 0 0 1-3-3V5a3 3 0 1 1 6 0v6a3 3 0 0 1-3 3M3 9v2a9 9 0 0 0 8 8.95V24h2v-4.05A9 9 0 0 0 21 11V9h-2v2a7 7 0 1 1-14 0V9z" />
+              </svg>
+            </button>
+          ) : (
+            <button
               onClick={() => setSearchQuery('')}
               className="absolute right-4 top-1/2 -translate-y-1/2 text-pinterest-mediumGray hover:text-pinterest-black transition-colors"
             >
@@ -197,8 +194,8 @@ export function Navbar() {
                     }}
                     className="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-100 transition-colors text-left"
                   >
-                    <img 
-                      src={idea.image} 
+                    <img
+                      src={idea.image}
                       alt={idea.name}
                       className="w-12 h-12 rounded-lg object-cover flex-shrink-0"
                     />
@@ -221,8 +218,8 @@ export function Navbar() {
                     }}
                     className="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-100 transition-colors text-left"
                   >
-                    <img 
-                      src={item.image} 
+                    <img
+                      src={item.image}
                       alt={item.name}
                       className="w-12 h-12 rounded-lg object-cover flex-shrink-0"
                     />
@@ -235,24 +232,17 @@ export function Navbar() {
         )}
       </div>
 
-      {/* Right Section - Exact Pinterest Icons */}
+      {/* Right Section - Profile only */}
       <div className="flex items-center gap-1 flex-shrink-0">
-        <button className="flex items-center justify-center w-12 h-12 rounded-full hover:bg-pinterest-hoverGray transition-colors text-pinterest-mediumGray">
-          <PinterestIcons.Notification />
-        </button>
-        
-        <button className="flex items-center justify-center w-12 h-12 rounded-full hover:bg-pinterest-hoverGray transition-colors text-pinterest-mediumGray">
-          <PinterestIcons.Message />
-        </button>
-
-        <button 
+        <button
           onClick={() => setIsProfileOpen(!isProfileOpen)}
-          className="flex items-center gap-1 p-2 rounded-full hover:bg-pinterest-hoverGray transition-colors"
+          className="flex items-center gap-1 p-1.5 rounded-full hover:bg-pinterest-hoverGray transition-colors"
         >
-          <div className="w-6 h-6 rounded-full bg-pinterest-lightGray overflow-hidden">
-            <img 
-              src="https://i.pravatar.cc/150?u=pinterestuser" 
-              alt="Profile" 
+          {/* Avatar circle — pink bg with initial letter */}
+          <div className="w-8 h-8 rounded-full bg-pink-200 flex items-center justify-center text-sm font-bold text-pink-700 overflow-hidden flex-shrink-0">
+            <img
+              src="https://i.pravatar.cc/150?u=pinterestuser"
+              alt="Profile"
               className="w-full h-full object-cover"
             />
           </div>
