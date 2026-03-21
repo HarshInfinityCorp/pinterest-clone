@@ -2,42 +2,75 @@
 
 import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
+<<<<<<< HEAD
 import { usePathname } from 'next/navigation'
 import { useAuth } from '@/lib/auth/AuthContext'
+=======
+import { Search, X, Check } from 'lucide-react'
+
+>>>>>>> dd5bbd3eca874db92ad0a096a09c58395f462e2d
 
 // Pinterest icons
 const PinterestIcons = {
   Logo: () => (
     <svg viewBox="0 0 24 24" className="w-6 h-6" fill="#E60023">
-      <path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/>
+      <path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z" />
     </svg>
   ),
   Notification: () => (
+<<<<<<< HEAD
     <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5">
       <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
       <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+=======
+    <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+      <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+>>>>>>> dd5bbd3eca874db92ad0a096a09c58395f462e2d
     </svg>
   ),
   Message: () => (
+<<<<<<< HEAD
     <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5">
       <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+=======
+    <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+>>>>>>> dd5bbd3eca874db92ad0a096a09c58395f462e2d
     </svg>
   ),
   ChevronDown: () => (
+<<<<<<< HEAD
     <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2">
       <polyline points="6 9 12 15 18 9"/>
+=======
+    <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="6 9 12 15 18 9" />
+>>>>>>> dd5bbd3eca874db92ad0a096a09c58395f462e2d
     </svg>
   ),
   Search: () => (
+<<<<<<< HEAD
     <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2">
       <circle cx="11" cy="11" r="8"/>
       <path d="m21 21-4.35-4.35"/>
+=======
+    <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="11" cy="11" r="8" />
+      <path d="m21 21-4.35-4.35" />
+>>>>>>> dd5bbd3eca874db92ad0a096a09c58395f462e2d
     </svg>
   ),
   Close: () => (
+<<<<<<< HEAD
     <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2">
       <line x1="18" y1="6" x2="6" y2="18"/>
       <line x1="6" y1="6" x2="18" y2="18"/>
+=======
+    <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="18" y1="6" x2="6" y2="18" />
+      <line x1="6" y1="6" x2="18" y2="18" />
+>>>>>>> dd5bbd3eca874db92ad0a096a09c58395f462e2d
     </svg>
   ),
   Logout: () => (
@@ -76,6 +109,7 @@ export function Navbar() {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [isProfileOpen, setIsProfileOpen] = useState(false)
   const searchRef = useRef<HTMLDivElement>(null)
+<<<<<<< HEAD
   const pathname = usePathname()
   const { logout } = useAuth()
 
@@ -83,11 +117,17 @@ export function Navbar() {
     { label: 'Home', href: '/' },
     { label: 'Today', href: '/today' },
   ]
+=======
+  const dropdownRef = useRef<HTMLDivElement>(null)
+>>>>>>> dd5bbd3eca874db92ad0a096a09c58395f462e2d
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
         setIsSearchOpen(false)
+      }
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsProfileOpen(false)
       }
     }
     document.addEventListener('mousedown', handleClickOutside)
@@ -95,6 +135,7 @@ export function Navbar() {
   }, [])
 
   return (
+<<<<<<< HEAD
     <header className="sticky top-0 h-20 bg-white z-30 px-4 flex items-center gap-2">
       {/* Logo */}
       <Link href="/" className="flex items-center justify-center w-12 h-12 rounded-full hover:bg-gray-100 transition-colors flex-shrink-0">
@@ -103,6 +144,12 @@ export function Navbar() {
 
       {/* Navigation Tabs */}
       <nav className="hidden md:flex items-center gap-1">
+=======
+    <header className="fixed top-0 left-0 lg:left-16 right-0 h-16 bg-white z-40 px-4 flex items-center gap-2">
+
+      {/* Navigation Tabs - Exact Pinterest Style */}
+      {/* <nav className="hidden md:flex items-center gap-0">
+>>>>>>> dd5bbd3eca874db92ad0a096a09c58395f462e2d
         {navItems.map((item) => {
           const isActive = pathname === item.href
           return (
@@ -119,7 +166,7 @@ export function Navbar() {
             </Link>
           )
         })}
-      </nav>
+      </nav> */}
 
       {/* Search Bar */}
       <div className="flex-1 max-w-[800px] mx-auto" ref={searchRef}>
@@ -133,18 +180,49 @@ export function Navbar() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onFocus={() => setIsSearchOpen(true)}
+<<<<<<< HEAD
             className={`w-full h-12 pl-12 pr-10 rounded-full border-none outline-none transition-all text-base placeholder:text-gray-500 ${
               isSearchOpen 
                 ? 'bg-white ring-4 ring-blue-100 shadow-lg' 
                 : 'bg-gray-100 focus:ring-4 focus:ring-blue-100'
             }`}
+=======
+            className={`w-full h-12 pl-12 pr-[140px] rounded-xl border-none outline-none transition-all text-base font-semibold placeholder:text-pinterest-mediumGray ${isSearchOpen
+              ? 'bg-white ring-4 ring-blue-100/50 shadow-lg'
+              : 'bg-[#e5e5e0] focus:ring-4 focus:ring-blue-100/50'
+              }`}
+>>>>>>> dd5bbd3eca874db92ad0a096a09c58395f462e2d
           />
-          {searchQuery && (
-            <button 
+          {/* Mic icon & Your Pins on right — hidden when there's typed text */}
+          {!searchQuery ? (
+            <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center">
+              <button
+                type="button"
+                className="w-8 h-8 flex items-center justify-center text-black hover:opacity-70 transition-opacity"
+                aria-label="Search by voice"
+              >
+                <svg height="20" viewBox="0 0 24 24" width="20" fill="currentColor">
+                  <path d="M12 0a5 5 0 0 0-5 5v6a5 5 0 0 0 10 0V5a5 5 0 0 0-5-5m0 14a3 3 0 0 1-3-3V5a3 3 0 1 1 6 0v6a3 3 0 0 1-3 3M3 9v2a9 9 0 0 0 8 8.95V24h2v-4.05A9 9 0 0 0 21 11V9h-2v2a7 7 0 1 1-14 0V9z" />
+                </svg>
+              </button>
+              <div className="w-[1px] h-6 bg-gray-300 mx-1"></div>
+              <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-full hover:bg-gray-200/50 transition-colors text-sm font-semibold text-black">
+                Your Pins
+                <PinterestIcons.ChevronDown />
+              </button>
+            </div>
+          ) : (
+            <button
               onClick={() => setSearchQuery('')}
+<<<<<<< HEAD
               className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-black transition-colors"
             >
               <PinterestIcons.Close />
+=======
+              className="absolute right-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full flex items-center justify-center hover:bg-gray-200 text-black transition-colors"
+            >
+              <X size={18} strokeWidth={2.5} />
+>>>>>>> dd5bbd3eca874db92ad0a096a09c58395f462e2d
             </button>
           )}
         </div>
@@ -185,8 +263,17 @@ export function Navbar() {
                     }}
                     className="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-100 transition-colors text-left"
                   >
+<<<<<<< HEAD
                     <img src={idea.image} alt={idea.name} className="w-12 h-12 rounded-lg object-cover flex-shrink-0" />
                     <span className="text-sm text-black truncate">{idea.name}</span>
+=======
+                    <img
+                      src={idea.image}
+                      alt={idea.name}
+                      className="w-12 h-12 rounded-lg object-cover flex-shrink-0"
+                    />
+                    <span className="text-sm text-pinterest-black truncate">{idea.name}</span>
+>>>>>>> dd5bbd3eca874db92ad0a096a09c58395f462e2d
                   </button>
                 ))}
               </div>
@@ -204,8 +291,17 @@ export function Navbar() {
                     }}
                     className="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-100 transition-colors text-left"
                   >
+<<<<<<< HEAD
                     <img src={item.image} alt={item.name} className="w-12 h-12 rounded-lg object-cover flex-shrink-0" />
                     <span className="text-sm text-black truncate">{item.name}</span>
+=======
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="w-12 h-12 rounded-lg object-cover flex-shrink-0"
+                    />
+                    <span className="text-sm text-pinterest-black truncate">{item.name}</span>
+>>>>>>> dd5bbd3eca874db92ad0a096a09c58395f462e2d
                   </button>
                 ))}
               </div>
@@ -214,6 +310,7 @@ export function Navbar() {
         )}
       </div>
 
+<<<<<<< HEAD
       {/* Right Section */}
       <div className="flex items-center gap-1 flex-shrink-0">
         <button className="flex items-center justify-center w-12 h-12 rounded-full hover:bg-gray-100 transition-colors text-gray-600">
@@ -274,6 +371,73 @@ export function Navbar() {
             </div>
           )}
         </div>
+=======
+      {/* Right Section - Profile only */}
+      <div className="flex items-center gap-2 flex-shrink-0 relative" ref={dropdownRef}>
+
+        {/* 1. Avatar button → navigates to /profile */}
+        <Link
+          href="/profile"
+          className="w-10 h-10 rounded-full bg-[#fbd4d6] flex items-center justify-center flex-shrink-0 border-2 border-black hover:opacity-80 transition-opacity"
+        >
+          <span className="text-black font-semibold text-sm">H</span>
+        </Link>
+
+        {/* 2. Chevron button → opens account dropdown */}
+        <button
+          id="profile-dropdown-trigger"
+          onClick={() => setIsProfileOpen(!isProfileOpen)}
+          className="flex items-center justify-center w-6 h-6 rounded-full bg-[#f1f1f1] hover:bg-gray-200 transition-colors text-black"
+          aria-label="Account options"
+        >
+          <PinterestIcons.ChevronDown />
+        </button>
+
+        {/* Account dropdown */}
+        {isProfileOpen && (
+          <div className="absolute top-full right-0 mt-2 w-72 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-50">
+
+            {/* Currently in section */}
+            <div className="px-5 pt-4 pb-2">
+              <p className="text-xs text-gray-400 font-medium mb-3">Currently in</p>
+              <div className="flex items-center gap-3">
+                {/* Avatar */}
+                <div className="w-10 h-10 rounded-full bg-pink-200 flex items-center justify-center text-base font-bold text-pink-600 flex-shrink-0">
+                  H
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-bold text-gray-900">Harsh Vaddoriya</p>
+                  <div className="flex items-center gap-1">
+                    <p className="text-xs text-gray-500">Personal</p>
+                    <Check size={13} className="text-gray-700 flex-shrink-0" strokeWidth={2.5} />
+                  </div>
+                  <p className="text-xs text-gray-400 truncate">harshvaddoriya0319@gm...</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="h-px bg-gray-100 my-1 mx-5" />
+
+            {/* Convert to business */}
+            <button className="w-full text-left px-5 py-3 text-sm font-semibold text-gray-900 hover:bg-gray-50 transition-colors">
+              Convert to business
+            </button>
+
+            <div className="h-px bg-gray-100 my-1 mx-5" />
+
+            {/* Your accounts */}
+            <div className="px-5 pt-3 pb-1">
+              <p className="text-xs text-gray-400 font-medium mb-1">Your accounts</p>
+            </div>
+            <button className="w-full text-left px-5 py-3 text-sm font-semibold text-gray-900 hover:bg-gray-50 transition-colors">
+              Add Pinterest account
+            </button>
+            <button className="w-full text-left px-5 py-3 mb-2 text-sm font-semibold text-gray-900 hover:bg-gray-50 transition-colors">
+              Log out
+            </button>
+          </div>
+        )}
+>>>>>>> dd5bbd3eca874db92ad0a096a09c58395f462e2d
       </div>
     </header>
   )

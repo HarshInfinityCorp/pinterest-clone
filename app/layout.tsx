@@ -14,10 +14,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+<<<<<<< HEAD
       <body className="min-h-screen bg-white">
         <AuthProvider>
           {children}
         </AuthProvider>
+=======
+      <body className="min-h-screen bg-white text-pinterest-black" suppressHydrationWarning={true}>
+        {children}
+>>>>>>> dd5bbd3eca874db92ad0a096a09c58395f462e2d
       </body>
     </html>
   )

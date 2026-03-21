@@ -12,7 +12,7 @@ export interface Pin {
 
 const sampleImages = [
   'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400',
-  'https://images.unsplash.com/photo-1513519245088-0e12902e35a6?w=400',
+  'https://plus.unsplash.com/premium_photo-1773452093235-06429f4c844d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw2fHx8ZW58MHx8fHx8',
   'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400',
   'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400',
   'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400',
@@ -98,21 +98,23 @@ const sampleVideos = [
   'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
 ]
 
-function generateRandomHeight(): number {
+function generateHeight(index: number): number {
   // Pinterest uses a range of aspect ratios for masonry effect
+  // Use index-based selection instead of Math.random() to keep SSR & client in sync
   const heights = [280, 320, 380, 420, 480, 520, 580, 620, 380, 420]
-  return heights[Math.floor(Math.random() * heights.length)]
+  return heights[index % heights.length]
 }
 
 export const pins: Pin[] = Array.from({ length: 100 }, (_, i) => {
-  const hasVideo = Math.random() < 0.15 // 15% of pins have videos
-  
+  // Use a deterministic pattern instead of Math.random() to avoid SSR/client mismatch
+  const hasVideo = i % 7 === 0 // every 7th pin has a video (~14%)
+
   return {
     id: `pin-${i}`,
     image: sampleImages[i % sampleImages.length],
     ...(hasVideo && { video: sampleVideos[i % sampleVideos.length] }),
     title: sampleTitles[i % sampleTitles.length],
     author: sampleAuthors[i % sampleAuthors.length],
-    height: generateRandomHeight(),
+    height: generateHeight(i),
   }
 })

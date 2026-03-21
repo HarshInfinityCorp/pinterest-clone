@@ -51,12 +51,11 @@ export function PinCard({ pin }: PinCardProps) {
       {/* Image/Video Container - Pinterest uses 16px border-radius */}
       <div 
         className="relative rounded-2xl overflow-hidden bg-pinterest-lightGray"
-        style={{ aspectRatio: `236 / ${pin.height}` }}
       >
         <img
           src={pin.image}
           alt={pin.title}
-          className={`w-full h-full object-cover transition-opacity duration-200 ${
+          className={`w-full h-auto block transition-opacity duration-200 ${
             pin.video && isHovered ? 'opacity-0' : 'opacity-100'
           }`}
           loading="lazy"
