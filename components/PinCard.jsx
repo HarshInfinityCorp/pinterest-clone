@@ -33,7 +33,7 @@ export default function PinCard({ pin }) {
         <img
           src={pin.image}
           alt={pin.title}
-          className="w-full h-auto object-cover rounded-2xl"
+          className="w-full h-auto block rounded-2xl"
           loading="lazy"
         />
 
