@@ -105,16 +105,28 @@ function generateHeight(index: number): number {
   return heights[index % heights.length]
 }
 
+const unsplashIds = [
+  '1675271591211-126ad94e1d7d', '1620712943543-bcc4628c6a20', '1678911820864-e2c567c655d7',
+  '1485081666276-0c5c7ad503d7', '1581091226825-a6a2a5aee158', '1605810230434-7631ac76ec81',
+  '1550751827-4bd374c3f58b', '1518770660439-4636190af475', '1451187580459-43490279c0fa',
+  '1581092795360-fd1ca04f0952', '1614741118887-7a4ee193a5fa', '1558494949-ef010cbdcc48',
+  '1633412802994-5c058f151b66', '1617791160505-6f008e17f9fe', '1535223289827-42f1e9919769',
+  '1461749280684-dccba630e2f6', '1519389950473-47ba0277781c', '1504384308090-c894fdcc538d',
+  '1581092580497-e0d23cbdf1dc', '1620641788421-7a1c342ea42e'
+]
+
 export const pins: Pin[] = Array.from({ length: 100 }, (_, i) => {
-  // Use a deterministic pattern instead of Math.random() to avoid SSR/client mismatch
-  const hasVideo = i % 7 === 0 // every 7th pin has a video (~14%)
+  // Use a deterministic pattern
+  const hasVideo = i % 7 === 0 
+  const photoId = unsplashIds[i % unsplashIds.length]
+  const height = generateHeight(i)
 
   return {
     id: `pin-${i}`,
-    image: `https://picsum.photos/seed/pinterest${i}/400/${generateHeight(i)}`,
+    image: `https://images.unsplash.com/photo-${photoId}?w=400&h=${height}&fit=crop&q=80`,
     ...(hasVideo && { video: sampleVideos[i % sampleVideos.length] }),
     title: sampleTitles[i % sampleTitles.length],
     author: sampleAuthors[i % sampleAuthors.length],
-    height: generateHeight(i),
+    height: height,
   }
 })

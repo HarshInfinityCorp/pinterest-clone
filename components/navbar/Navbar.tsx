@@ -53,31 +53,31 @@ const PinterestIcons = {
   )
 }
 
-// Mock data for search dropdown
+// Mock data for search dropdown - AI themed
 const recentSearches = [
-  'radha krishna with radhe mantra wallpaper',
-  'radha krishna with mantra wallpaper',
-  'radha krishna with mantra dark background wallpaper',
+  'AI art generator stable diffusion',
+  'Midjourney prompts for interior design',
+  'Generative AI coding assistants',
 ]
 
 const ideasForYou = [
-  { name: 'Education', image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=100&h=100&fit=crop' },
-  { name: 'Krishna', image: 'https://images.unsplash.com/photo-1567593810070-7a3d471af022?w=100&h=100&fit=crop' },
-  { name: 'Nature pictures', image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=100&h=100&fit=crop' },
-  { name: 'Galaxy wallpaper', image: 'https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=100&h=100&fit=crop' },
-  { name: 'Subjects', image: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=100&h=100&fit=crop' },
-  { name: 'Landscape photography', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=100&h=100&fit=crop' },
+  { name: 'AI Avatars', image: 'https://images.unsplash.com/photo-1675271591211-126ad94e1d7d?w=200&h=200&fit=crop' },
+  { name: 'Deep Learning', image: 'https://images.unsplash.com/photo-1620712943543-bcc4628c6a20?w=200&h=200&fit=crop' },
+  { name: 'Neural Networks', image: 'https://images.unsplash.com/photo-1509228627152-72ae9ae6848d?w=200&h=200&fit=crop' },
+  { name: 'Future Robotics', image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=200&h=200&fit=crop' },
+  { name: 'AI Architecture', image: 'https://images.unsplash.com/photo-1678911820864-e2c567c655d7?w=200&h=200&fit=crop' },
+  { name: 'Machine Learning', image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=200&h=200&fit=crop' },
 ]
 
 const popularOnPinterest = [
-  { name: 'Night rain', image: 'https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?w=100&h=100&fit=crop' },
-  { name: 'Laptop wallpaper', image: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=100&h=100&fit=crop' },
-  { name: 'Tattoo ideas', image: 'https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?w=100&h=100&fit=crop' },
-  { name: 'Easy drawings', image: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=100&h=100&fit=crop' },
-  { name: 'My photo gallery', image: 'https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=100&h=100&fit=crop' },
-  { name: 'Pink background', image: 'https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=100&h=100&fit=crop' },
-  { name: 'Mehendi designs for eid', image: 'https://images.unsplash.com/photo-1590235530620-9973a4519c90?w=100&h=100&fit=crop' },
-  { name: 'Aesthetic pictures', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop' },
+  { name: 'AI Digital Art', image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=200&h=200&fit=crop' },
+  { name: 'Future Cities', image: 'https://images.unsplash.com/photo-1614728263952-84ea206f99b6?w=200&h=200&fit=crop' },
+  { name: 'Cyberpunk Aesthetic', image: 'https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=200&h=200&fit=crop' },
+  { name: 'Tech Innovations', image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=200&h=200&fit=crop' },
+  { name: 'Smart Home Tech', image: 'https://images.unsplash.com/photo-1558002038-1055907df827?w=200&h=200&fit=crop' },
+  { name: 'Virtual Reality', image: 'https://images.unsplash.com/photo-1592478411213-6153e4ebc07d?w=200&h=200&fit=crop' },
+  { name: 'Coding with AI', image: 'https://images.unsplash.com/photo-1587620962725-abab7fe55159?w=200&h=200&fit=crop' },
+  { name: 'Data Visualization', image: 'https://images.unsplash.com/photo-1551288049-bbbda536ad0a?w=200&h=200&fit=crop' },
 ]
 
 export function Navbar() {
@@ -102,7 +102,7 @@ export function Navbar() {
   }, [])
 
   return (
-    <header className="fixed top-2 left-0 lg:left-16 right-0 h-16 bg-white z-40 px-4 flex items-center gap-2">
+    <header className="fixed top-0 left-0 lg:left-16 right-0 h-16 bg-white z-40 px-4 flex items-center gap-2">
 
       {/* Navigation Tabs - Exact Pinterest Style */}
       {/* <nav className="hidden md:flex items-center gap-0">
@@ -125,9 +125,9 @@ export function Navbar() {
       </nav> */}
 
       {/* Search Bar with Dropdown */}
-      <div className="flex-1 min-w-0 relative" ref={searchRef}>
+      <div className="flex-1 min-w-0 relative px-2" ref={searchRef}>
         <div className="relative">
-          <div className="absolute left-4 top-1/2 -translate-y-1/2 text-pinterest-mediumGray">
+          <div className="absolute left-4 top-1/2 -translate-y-1/2 text-[#767676]">
             <PinterestIcons.Search />
           </div>
           <input
@@ -136,46 +136,41 @@ export function Navbar() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onFocus={() => setIsSearchOpen(true)}
-            className={`w-full h-12 pl-12 pr-[140px] rounded-xl border-none outline-none transition-all text-base font-semibold placeholder:text-pinterest-mediumGray ${isSearchOpen
-              ? 'bg-white ring-4 ring-blue-100/50 shadow-lg'
-              : 'bg-[#e5e5e0] focus:ring-4 focus:ring-blue-100/50'
+            className={`w-full h-12 pl-12 pr-12 rounded-xl border-none outline-none transition-all text-[16px] font-medium placeholder:text-[#767676] ${isSearchOpen
+              ? 'bg-white ring-[4px] ring-[#3b82f6]/30 shadow-lg'
+              : 'bg-[#E9E9E9] hover:bg-[#DCDCDC]'
               }`}
           />
-          {/* Mic icon & Your Pins on right — hidden when there's typed text */}
-          {!searchQuery ? (
-            <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center">
+          {/* Mic icon & Close icon */}
+          <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
+            {!searchQuery ? (
               <button
                 type="button"
-                className="w-8 h-8 flex items-center justify-center text-black hover:opacity-70 transition-opacity"
+                className="w-9 h-9 flex items-center justify-center text-black hover:bg-gray-200 rounded-full transition-colors"
                 aria-label="Search by voice"
               >
                 <svg height="20" viewBox="0 0 24 24" width="20" fill="currentColor">
                   <path d="M12 0a5 5 0 0 0-5 5v6a5 5 0 0 0 10 0V5a5 5 0 0 0-5-5m0 14a3 3 0 0 1-3-3V5a3 3 0 1 1 6 0v6a3 3 0 0 1-3 3M3 9v2a9 9 0 0 0 8 8.95V24h2v-4.05A9 9 0 0 0 21 11V9h-2v2a7 7 0 1 1-14 0V9z" />
                 </svg>
               </button>
-              {/* <div className="w-[1px] h-6 bg-gray-300 mx-1"></div> */}
-              {/* <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-full hover:bg-gray-200/50 transition-colors text-sm font-semibold text-black">
-                Your Pins
-                <PinterestIcons.ChevronDown />
-              </button> */}
-            </div>
-          ) : (
-            <button
-              onClick={() => setSearchQuery('')}
-              className="absolute right-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full flex items-center justify-center hover:bg-gray-200 text-black transition-colors"
-            >
-              <X size={18} strokeWidth={2.5} />
-            </button>
-          )}
+            ) : (
+              <button
+                onClick={() => setSearchQuery('')}
+                className="w-9 h-9 rounded-full flex items-center justify-center hover:bg-gray-200 text-black transition-colors"
+              >
+                <X size={20} strokeWidth={2.5} />
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Search Dropdown */}
         {isSearchOpen && (
-          <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden max-h-[80vh] overflow-y-auto">
+          <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-[32px] shadow-[0_4px_30px_rgba(0,0,0,0.15)] border border-gray-100 overflow-hidden max-h-[85vh] overflow-y-auto z-50 animate-in fade-in zoom-in-95 duration-200">
             {/* Recent searches */}
-            <div className="p-4">
-              <h3 className="text-sm font-semibold text-pinterest-black mb-3">Recent searches</h3>
-              <div className="space-y-2">
+            <div className="px-6 pt-6 pb-4">
+              <h3 className="text-[16px] font-bold text-black mb-4 ml-1">Recent searches</h3>
+              <div className="flex flex-wrap gap-2">
                 {recentSearches.map((search, index) => (
                   <button
                     key={index}
@@ -183,21 +178,21 @@ export function Navbar() {
                       setSearchQuery(search)
                       setIsSearchOpen(false)
                     }}
-                    className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gray-100 transition-colors text-left"
+                    className="flex items-center gap-3 p-1.5 pr-5 rounded-[16px] bg-[#F0F0F0] hover:bg-[#E2E2E2] transition-colors text-left"
                   >
-                    <div className="w-10 h-10 rounded-full bg-pinterest-lightGray flex items-center justify-center flex-shrink-0">
-                      <Search size={18} className="text-pinterest-mediumGray" />
+                    <div className="w-15 h-15 rounded-[12px] bg-[#E2E2E2] flex items-center justify-center flex-shrink-0">
+                      <Search size={22} className="text-black" strokeWidth={3} />
                     </div>
-                    <span className="text-sm text-pinterest-black line-clamp-2">{search}</span>
+                    <span className="text-[15px] font-bold text-black whitespace-nowrap">{search}</span>
                   </button>
                 ))}
               </div>
             </div>
 
             {/* Ideas for you */}
-            <div className="p-4 border-t border-gray-100">
-              <h3 className="text-sm font-semibold text-pinterest-black mb-3">Ideas for you</h3>
-              <div className="grid grid-cols-2 gap-2">
+            <div className="px-6 pt-4 pb-4">
+              <h3 className="text-[16px] font-bold text-black mb-4 ml-1">Ideas for you</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
                 {ideasForYou.map((idea, index) => (
                   <button
                     key={index}
@@ -205,23 +200,23 @@ export function Navbar() {
                       setSearchQuery(idea.name)
                       setIsSearchOpen(false)
                     }}
-                    className="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-100 transition-colors text-left"
+                    className="flex items-center gap-3 p-1.5 rounded-[16px] bg-[#F0F0F0] hover:bg-[#E2E2E2] transition-colors text-left overflow-hidden group"
                   >
                     <img
                       src={idea.image}
                       alt={idea.name}
-                      className="w-12 h-12 rounded-lg object-cover flex-shrink-0"
+                      className="w-14 h-14 rounded-[12px] object-cover flex-shrink-0"
                     />
-                    <span className="text-sm text-pinterest-black truncate">{idea.name}</span>
+                    <span className="text-[15px] font-bold text-black truncate pr-2 group-hover:text-black">{idea.name}</span>
                   </button>
                 ))}
               </div>
             </div>
 
             {/* Popular on Pinterest */}
-            <div className="p-4 border-t border-gray-100">
-              <h3 className="text-sm font-semibold text-pinterest-black mb-3">Popular on Pinterest</h3>
-              <div className="grid grid-cols-2 gap-2">
+            <div className="px-6 pt-4 pb-8">
+              <h3 className="text-[16px] font-bold text-black mb-4 ml-1">Popular on Pinterest</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
                 {popularOnPinterest.map((item, index) => (
                   <button
                     key={index}
@@ -229,14 +224,14 @@ export function Navbar() {
                       setSearchQuery(item.name)
                       setIsSearchOpen(false)
                     }}
-                    className="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-100 transition-colors text-left"
+                    className="flex items-center gap-3 p-1.5 rounded-[16px] bg-[#F0F0F0] hover:bg-[#E2E2E2] transition-colors text-left overflow-hidden group"
                   >
                     <img
                       src={item.image}
                       alt={item.name}
-                      className="w-12 h-12 rounded-lg object-cover flex-shrink-0"
+                      className="w-14 h-14 rounded-[12px] object-cover flex-shrink-0"
                     />
-                    <span className="text-sm text-pinterest-black truncate">{item.name}</span>
+                    <span className="text-[15px] font-bold text-black truncate pr-2 group-hover:text-black">{item.name}</span>
                   </button>
                 ))}
               </div>

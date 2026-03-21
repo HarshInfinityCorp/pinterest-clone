@@ -13,7 +13,7 @@ export default function PinCreationTool() {
       <div className="flex-1 flex flex-col min-w-0">
 
         {/* Top bar for Create Pin */}
-        <div className="h-[72px] border-y border-gray-200 flex items-center px-8 bg-white z-10 shrink-0">
+        <div className="h-[72px] border-b border-gray-200 flex items-center px-8 bg-white z-10 shrink-0">
           <h1 className="text-xl font-bold tracking-tight">Create Pin</h1>
         </div>
 
