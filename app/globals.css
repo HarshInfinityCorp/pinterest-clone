@@ -6,45 +6,46 @@
   * {
     @apply box-border;
   }
-  
+
   body {
-    @apply font-sans text-black antialiased;
+    @apply font-sans text-pinterest-black antialiased;
     background-color: #FFFFFF;
   }
 }
 
 @layer utilities {
+
   /* Pinterest Masonry Grid - Exact column behavior */
   .masonry-grid {
     column-count: 2;
     column-gap: 16px;
     padding: 0 8px;
   }
-  
+
   @media (min-width: 768px) {
     .masonry-grid {
       column-count: 3;
     }
   }
-  
+
   @media (min-width: 1024px) {
     .masonry-grid {
       column-count: 4;
     }
   }
-  
+
   @media (min-width: 1280px) {
     .masonry-grid {
       column-count: 5;
     }
   }
-  
+
   @media (min-width: 1536px) {
     .masonry-grid {
       column-count: 6;
     }
   }
-  
+
   .masonry-item {
     break-inside: avoid;
     margin-bottom: 16px;
@@ -56,7 +57,7 @@
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
-  
+
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -69,12 +70,15 @@
     transform: translateY(100vh);
     opacity: 0;
   }
+
   10% {
     opacity: 0.8;
   }
+
   90% {
     opacity: 0.8;
   }
+
   100% {
     transform: translateY(-100vh);
     opacity: 0;
@@ -85,6 +89,7 @@
   0% {
     transform: translateY(0);
   }
+
   100% {
     transform: translateY(-50%);
   }
@@ -96,22 +101,6 @@
 
 .animate-scroll-up {
   animation: scroll-up 30s linear infinite;
-}
-
-/* Settings panel animation */
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.animate-in {
-  animation: slideIn 0.15s ease-out;
 }
 
 /* Smooth scroll behavior */
